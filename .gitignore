@@ -65,7 +65,6 @@ bkrp/bkrp/bin/Release/net6.0/bkrp.deps.json
 bkrp/bkrp/bin/Release/net6.0/bkrp.dll
 bkrp/bkrp/bin/Release/net6.0/bkrp.pdb
 bkrp/bkrp/bin/Release/net6.0/ref/bkrp.dll
-bkrp/bkrp/Factory/PlayerFactory.cs
 bkrp/bkrp/obj/bkrp.csproj.nuget.dgspec.json
 bkrp/bkrp/obj/project.assets.json
 bkrp/bkrp/obj/project.nuget.cache
@@ -87,18 +86,11 @@ cache/gamemode.resource
 cache/gamemodepackage.resource
 server.log
 bkrp/.vs/bkrp/v16/.suo
-bkrp/bkrp/Main.cs
 bkrp/bkrp/bkrp.csproj
 server.cfg
 .vscode/settings.json
 bkrp/.vs/bkrp/DesignTimeBuild/.dtbcache.v2
 bkrp/bkrp/obj/Debug/net6.0/bkrp.csproj.AssemblyReference.cache
-bkrp/bkrp/Tool/System/Database.cs
-bkrp/bkrp/Tool/System/Initialize.cs
-bkrp/bkrp/Tool/System/Logger.cs
-bkrp/bkrp/Tool/Timer/Clock.cs
-bkrp/bkrp/Tool/Timer/Timer.cs
-bkrp/bkrp/Tool/Timer/TimerTask.cs
 resources/package.json
 resources/package-lock.json
 resources/gamemodepackage/webview/account/app.js
