@@ -36,7 +36,7 @@ namespace bkrp
 
         public void SetSecondTimer()
         {
-            Plugin.Timer.SetInterval(1000, () =>
+            Timer.SetInterval(1000, () =>
             {
                 try
                 {
@@ -78,9 +78,9 @@ namespace bkrp
         }
         public void SetHoursTimer()
         {
-            Plugin.Timer.SetTimeOut(WaitForHourMS(), () =>
+            Timer.SetTimeOut(WaitForHourMS(), () =>
             {
-                Plugin.Timer.SetInterval(1000 * 60 * 60, (r) =>
+                Timer.SetInterval(1000 * 60 * 60, (r) =>
                 {
                     try
                     {
@@ -105,7 +105,7 @@ namespace bkrp
                         if (LastHour == CurrentHour)
                         {
                             Log.Server($"上一次报时:{LastHour},此次报时:H{CurrentHour}:{CurrentMinute}:{CurrentSecond}, 报时出现偏差:{WaitForHourMSStr()}, 正在调整.");
-                            Plugin.Timer.SetTimeOut(WaitForHourMS(), () =>
+                            Timer.SetTimeOut(WaitForHourMS(), () =>
                             {
                                 Log.Server($"偏差纠正报时: {CurrentHour}");
                                 HourEvent();
