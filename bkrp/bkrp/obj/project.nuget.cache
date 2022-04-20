@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "UBQaINOI0gX3+X5e558vXpRXMxKJujSHe+lsN80/Ln86HXLcFljZCmCf9nfyvI1lN7Wyg97RQ8hEaZ3a8JzmPg==",
+  "success": true,
+  "projectFilePath": "E:\\Develop\\Project\\GTARP\\BKRP_AltV\\bkrp\\bkrp\\bkrp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\S4ncT1on\\.nuget\\packages\\altv.net\\10.0.51-dev\\altv.net.10.0.51-dev.nupkg.sha512",
+    "C:\\Users\\S4ncT1on\\.nuget\\packages\\altv.net.capi\\10.0.51-dev\\altv.net.capi.10.0.51-dev.nupkg.sha512",
+    "C:\\Users\\S4ncT1on\\.nuget\\packages\\altv.net.entitysync\\1.13.0\\altv.net.entitysync.1.13.0.nupkg.sha512",
+    "C:\\Users\\S4ncT1on\\.nuget\\packages\\altv.net.shared\\10.0.51-dev\\altv.net.shared.10.0.51-dev.nupkg.sha512",
+    "C:\\Users\\S4ncT1on\\.nuget\\packages\\system.threading.channels\\5.0.0\\system.threading.channels.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

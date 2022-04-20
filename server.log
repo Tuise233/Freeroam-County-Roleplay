@@ -1,0 +1,12 @@
+[19:25:13] alt:V Server 9.9 (release)
+[19:25:13] Starting [CN]Freeroam County RolePlay - 2022 on 0.0.0.0:7788
+[19:25:13] Required server permissions:
+[19:25:13] Optional server permissions:
+[19:25:13] Starting HTTP server on 0.0.0.0:7788
+[19:25:13] Main thread started (ThreadId: 32912)
+[19:25:13] Colshape thread started (ThreadId: 16404)
+[19:25:13] Server started
+[19:25:13] EntityStreamer thread started (ThreadId: 31444)
+[19:25:13] Sync thread started (ThreadId: 10872)
+[19:25:13] Network thread started (ThreadId: 29732)
+[19:25:13] Console thread started (ThreadId: 24384)

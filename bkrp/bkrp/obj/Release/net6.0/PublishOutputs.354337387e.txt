@@ -1,0 +1,4 @@
+E:\Develop\Project\GTARP\BKRP_AltV\resources\gamemode\bkrp.dll
+E:\Develop\Project\GTARP\BKRP_AltV\resources\gamemode\bkrp.deps.json
+E:\Develop\Project\GTARP\BKRP_AltV\resources\gamemode\bkrp.pdb
+E:\Develop\Project\GTARP\BKRP_AltV\resources\gamemode\AltV.Net.EntitySync.dll
