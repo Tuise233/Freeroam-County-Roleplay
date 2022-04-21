@@ -1,4 +1,5 @@
 ﻿using AltV.Net;
+using AltV.Net.Data;
 using AltV.Net.Elements.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,15 @@ namespace bkrp
         public AccountManager()
         {
             EventManager.OnPlayerConnected += EventManager_OnPlayerConnected;
+            EventManager.OnPlayerLogin += EventManager_OnPlayerLogin;
         }
 
-        private void EventManager_OnPlayerConnected(IPlayer player)
+        private void EventManager_OnPlayerLogin(PlayerEx player, AccountModel model)
+        {
+            player.Account = model;
+        }
+
+        private void EventManager_OnPlayerConnected(PlayerEx player)
         {
             if(!player.HasMetaData("login"))
             {
@@ -53,7 +60,28 @@ namespace bkrp
                             else
                             {
                                 //注册成功
-                                Log.Server("注册成功");
+                                Database.ExecuteSql($"SELECT * FROM `account` WHERE `username`='${username}'", (reader, err) =>
+                                {
+                                    if(err)
+                                    {
+                                        player.Emit("accont:client-displayErr", "数据库异常抛出");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        Log.Server("注册成功");
+                                        AccountModel model = new AccountModel
+                                        {
+                                            id = reader.GetInt32("id"),
+                                            username = reader.GetString("username"),
+                                            password = reader.GetString("password"),
+                                            email = reader.GetString("email"),
+                                            max_character = reader.GetInt32("max_character")
+                                        };
+                                        EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
+                                        SelectCharacter(player);
+                                    }
+                                });
                             }
                         });
                 }
@@ -78,6 +106,16 @@ namespace bkrp
                         if(reader.GetString("password") == password)
                         {
                             Log.Server("登陆成功");
+                            AccountModel model = new AccountModel
+                            {
+                                id = reader.GetInt32("id"),
+                                username = reader.GetString("username"),
+                                password = reader.GetString("password"),
+                                email = reader.GetString("email"),
+                                max_character = reader.GetInt32("max_character")
+                            };
+                            EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
+                            SelectCharacter(player);
                             return;
                         }
                         else
@@ -87,6 +125,20 @@ namespace bkrp
                         }
                     }
                 }
+            });
+        }
+
+        public static void SelectCharacter(IPlayer player)
+        {
+            player.Dimension = 100 + player.Id;
+            player.Emit("freeze:toggle", true);
+            player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
+            player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
+
+            Timer.SetTimeOut(500, () =>
+            {
+                player.Emit("account:destroy");
+                player.Emit("character:load");
             });
         }
     }
