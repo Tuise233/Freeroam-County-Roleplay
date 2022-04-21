@@ -1,0 +1,73 @@
+::selection {
+    background: none!important;
+  }
+  body {
+      background: none!important;
+      font-family: 'Fjalla One', sans-serif;
+      letter-spacing: 0.6px;
+      user-select: none;
+  }
+  .panel-inventory {
+      margin-bottom: 0px!important;
+      border-radius: 0px;
+      background: rgba(81, 81, 81, 1.0);
+      color: #fff!important;
+  }
+  .panel-footer {
+      color: #fff;
+  }
+  .panel-male {
+      background-color: #1A1A1A;
+  }
+  .panel-female {
+      background-color: #ab47bc;
+  }
+  h3 {
+      color: #fff!important;
+      font-size: 18px!important;
+  }
+  .g-select {
+      cursor: pointer;
+  }
+  .margt {
+      margin-top: 5%;
+  }
+  .gender {
+      background: rgba(81, 81, 81, 1.0);
+      height: 35px;
+      width: 95px;
+  }
+  .male {
+      height: 35px;
+      font-size: 20px;
+      background-color: #0ab1fc;
+  }
+  .male .fas {
+      margin-top: 8px;
+  }
+  .female {
+      height: 35px;
+      font-size: 20px;
+      background-color: #ab47bc;
+  }
+  .female .fas {
+      margin-top: 8px;
+  }
+  .gender-text {
+      margin-top: 8px;
+  }
+  input {
+      background-color: rgba(0,0,0,0.3)!important;
+      color: #fff!important;
+      text-align: center;
+      text-transform: uppercase;
+      border: none;
+      transition: none!important;
+      letter-spacing: 0.6px!important;
+  }
+  input:focus {
+      border: none;
+  }
+  .btn-default {
+      border-radius: 0px;
+  }

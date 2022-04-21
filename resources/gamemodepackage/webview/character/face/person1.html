@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<!-- <base href="/"> -->
+
+	<meta name="description" content="RP">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- <link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/range.css">
+  <link rel="stylesheet" href="css/stylenorm.css"> -->
+  	<link rel="stylesheet" href="../../assets/css/range.css">
+	<link rel="stylesheet" href="./normalize.css">
+	<link rel="stylesheet" href="./stylenorm.css">
+</head>
+
+<body class="create">
+
+  <div class="create-char">
+
+		<div class="step">
+
+			<div class="step-header">
+				<span class="step-title underline">角色信息</span>
+			</div>
+
+			<form class="ui form">
+				<div class="input-container">
+					<div class="input">
+						<input type="text" placeholder="姓名" id="creation_forename">
+					</div>
+					<div class="input">
+						<input type="text" placeholder="名字" id="creation_surname">
+					</div>
+				</div>
+
+				<div class="select-container">
+					<span class="step-title text-center d-block">性别</span>
+					<div class="select-gender" id="creation_gender">
+						<input type="hidden" name="gender" id="gender-value">
+						<div class="gender-button">
+							<div class="gender gender_male button button-dark" data-value="1">男性</div>
+						</div>
+						<div class="gender-button">
+							<div class="gender gender_female button button-dark" data-value="0">女性</div>
+						</div>
+					</div>
+				<div class="input-container" style="margin-left:36%; margin-top:6%; width:28%;">
+					<div class="input">
+						<input name="age" style="text-align:center;" type="number" placeholder="年龄" id="creation_age" >
+					</div>
+				</div>
+				</div>
+				
+				<div class="ui error message"></div>
+			</form>
+ 
+		</div>
+
+		<div class="step">
+			<div class="step-header">
+				<span class="step-title underline">第二步</span>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">母亲</span>
+					<span class="slider-value" id="display-base"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_base"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">父亲</span>
+					<span class="slider-value" id="display-base2"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_base2"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">相似度</span>
+					<span class="badge">
+						<i class="fa fa-angle-left"></i>
+						父亲 - 母亲
+						<i class="fa fa-angle-right"></i>
+					</span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_baseblend"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">肤色</span>
+					<span class="badge">
+						<i class="fa fa-angle-left"></i>
+						父亲 - 母亲
+						<i class="fa fa-angle-right"></i>
+					</span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_skin"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">瞳色</span>
+					<span class="slider-value" id="display-eyes"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_eyes"></div>
+				</div>
+			</div>
+			
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">发型</span>
+					<span class="slider-value" id="display-hair"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_hair"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">发色</span>
+					<span class="slider-value" id="display-haircolor"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_haircolor"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">高光发色</span>
+					<span class="slider-value" id="display-haircolor2"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_haircolor2"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">眉毛</span>
+					<span class="slider-value" id="display-eyebrows"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_eyebrows"></div>
+				</div>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">胡须</span>
+					<span class="slider-value" id="display-beard"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="range_beard"></div>
+				</div>
+			</div>
+
+			<div class="step-buttons">
+				<div class="button button-dark" id="charcreation_back"><i class="fas fa-sign-out-alt" style="transform: rotate(180deg);"></i>返回</div>
+				<div class="button button-yellow" id="charcreation_next">下一步</div>
+			</div>
+			
+		</div>
+
+	</div>
+
+	<div class="camera">
+		<span class="camera-title">相机</span>
+		<div class="camera-buttons">
+			<div class="button button-dark" id="charcreation_head">面部</div>
+			<div class="button button-dark" id="charcreation_body">全身</div>
+		</div>
+		<span class="camera-title rotate">旋转角度</span>
+		<div class="ui range" id="range_rotation"></div>
+	</div>
+
+	<script src="../../assets/js/jquery.min.js"></script>
+	<script src="../../assets/js/semantic-ui-range-1.0.1.js"></script>
+	<script src="../../assets/js/semantic-ui-2.3.1.min.js"></script>
+	<script src="./js/app1.js"></script>
+</body>
+</html>

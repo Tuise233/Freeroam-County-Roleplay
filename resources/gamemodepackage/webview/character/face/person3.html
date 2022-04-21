@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+	<!-- <base href="/"> -->
+	<meta name="description" content="Texas RP">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../assets/css/range.css">
+  <link rel="stylesheet" href="./normalize.css">
+  <link rel="stylesheet" href="./stylenorm.css">
+
+</head>
+
+<body class="create">
+
+  <div class="create-char create-char-3">
+
+		<div class="step">
+			<div class="step-header">
+				<span class="step-title underline">请选择您的服装</span>
+			</div>
+
+			<div class="slider-container">
+				<div class="slider-header">
+					<span class="setting-name">服装</span>
+					<span class="slider-value" id="traje-display"></span>
+				</div>
+				<div class="slider">
+					<div class="ui range" id="traje"></div>
+				</div>
+			</div>
+
+			<div class="step-buttons">
+				<div class="button button-dark" id="charcreation_back"><i class="fas fa-sign-out-alt" style="transform: rotate(180deg);"></i>返回</div>
+				<div class="button button-yellow" id="charcreation_next">下一步</div>
+			</div>
+
+			<div class="message-custom">
+				<div class="icon"><i class="fas fa-info"></i></div>
+				<p class="text">
+				  	   您以后可以前往服装店购买衣服
+				</p>
+			</div>
+			
+		</div>
+
+	</div>
+
+	<div class="camera">
+		<span class="camera-title">相机</span>
+		<div class="camera-buttons">
+			<div class="button button-dark" id="charcreation_head">面部</div>
+			<div class="button button-dark" id="charcreation_body">全身</div>
+		</div>
+		<span class="camera-title rotate">角度</span>
+		<div class="ui range" id="range_rotation"></div>
+	</div>
+
+	<script src="../../assets/js/jquery.min.js"></script>
+	<script src="../../assets/js/semantic-ui-range-1.0.1.js"></script>
+	<script src="../../assets/js/semantic-ui-2.3.1.min.js"></script>
+    <script src="./js/app3.js"></script>
+</body>
+</html>
