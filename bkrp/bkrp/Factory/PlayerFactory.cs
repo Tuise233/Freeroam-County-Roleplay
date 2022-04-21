@@ -8,17 +8,25 @@ using System.Threading.Tasks;
 
 namespace bkrp
 {
-    class PlayerFactory : IScript
+    class PlayerFactory : IEntityFactory<PlayerEx>
     {
-        public static List<IPlayer> Players = new List<IPlayer>();
+        public static List<PlayerEx> Players = new List<PlayerEx>();
 
         public PlayerFactory()
         {
+            /*
             EventManager.OnPlayerConnected += EventManager_OnPlayerConnected;
             EventManager.OnPlayerDisconnected += EventManager_OnPlayerDisconnected;
+            */
         }
 
-        private void EventManager_OnPlayerDisconnected(IPlayer arg1, string arg2)
+        public PlayerEx Create(IServer server, IntPtr entityPointer, ushort id)
+        {
+            return new PlayerEx(server, entityPointer, id);
+        }
+
+        /*
+        private void EventManager_OnPlayerDisconnected(PlayerEx arg1, string arg2)
         {
             if(Players.Contains(arg1))
             {
@@ -27,7 +35,7 @@ namespace bkrp
             }
         }
 
-        private void EventManager_OnPlayerConnected(IPlayer obj)
+        private void EventManager_OnPlayerConnected(PlayerEx obj)
         {
             if(!Players.Contains(obj))
             {
@@ -35,5 +43,6 @@ namespace bkrp
                 Log.Server($" [PlayerFactory]ID为{obj.Id}的玩家被加入PlayerFactory");
             }
         }
+        */
     }
 }
