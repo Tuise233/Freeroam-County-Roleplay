@@ -12,8 +12,8 @@ namespace bkrp
         public ParentData Parents;
         public ClothesData Clothes = new ClothesData();
         public AccessoryData Accessory = new AccessoryData();
-        public float[] Features = new float[20];
-        public AppearanceItem[] Appearance = new AppearanceItem[13];
+        public List<float> Features = new List<float>();
+        public List<AppearanceItem> Appearance = new List<AppearanceItem>();
         public HairData Hair;
 
         public int EyebrowColor;
@@ -31,9 +31,10 @@ namespace bkrp
         {
             Gender = 0;
             Parents = new ParentData(0, 0, 1.0f, 1.0f);
-            for (int i = 0; i < Features.Length; i++) Features[i] = 0f;
-            for (int i = 0; i < Appearance.Length; i++) Appearance[i] = new AppearanceItem(255, 1.0f, 0);
+            for (int i = 0; i < 20; i++) Features.Add(0f);
+            for (int i = 0; i < 13; i++) Appearance.Add(new AppearanceItem(255, 1.0f, 0));
             Hair = new HairData(0, 0, 0);
+            PedTatttoos = new PedTattoos();
         }
     }
 
@@ -135,13 +136,13 @@ namespace bkrp
 
         public HairData(int hair, int color, int highlightcolor)
         {
-            Hair = hair;
-            Color = color;
-            HighlightColor = highlightcolor;
+            this.Hair = hair;
+            this.Color = color;
+            this.HighlightColor = highlightcolor;
         }
     }
 
-    public struct PedTattoos
+    public class PedTattoos
     {
         public List<KeyValuePair<string, string>> TorsoTattoos;
         public List<KeyValuePair<string, string>> HeadTattoos;
@@ -150,5 +151,16 @@ namespace bkrp
         public List<KeyValuePair<string, string>> LeftLegTattoos;
         public List<KeyValuePair<string, string>> RightLegTattoos;
         public List<KeyValuePair<string, string>> BadgeTattoos;
+
+        public PedTattoos()
+        {
+            this.TorsoTattoos = new List<KeyValuePair<string, string>>();
+            this.HeadTattoos = new List<KeyValuePair<string, string>>();
+            this.LeftArmTattoos = new List<KeyValuePair<string, string>>();
+            this.RightArmTattoos = new List<KeyValuePair<string, string>>();
+            this.LeftLegTattoos = new List<KeyValuePair<string, string>>();
+            this.RightLegTattoos = new List<KeyValuePair<string, string>>();
+            this.BadgeTattoos = new List<KeyValuePair<string, string>>();
+        }
     }
 }

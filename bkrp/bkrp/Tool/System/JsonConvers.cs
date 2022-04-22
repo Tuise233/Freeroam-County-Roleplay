@@ -100,6 +100,11 @@ namespace bkrp
                         return ListToJson((item as IList<object>));
                     }
                     else
+                    if(item is IList<float>)
+                    {
+                        return ListToJson((item as IList<float>));
+                    }
+                    else
                     if (item is IDictionary<object, object>)
                     {
                         return DictionaryToJson((item as IDictionary<object, object>));
@@ -123,6 +128,11 @@ namespace bkrp
                     if (item is IEnumerable<int>)
                     {
                         return EnumerableToJson((item as IEnumerable<int>));
+                    }
+                    else
+                    if(item is IList<KeyValuePair<string, string>>)
+                    {
+                        return ListToJson((item as IList<KeyValuePair<string, string>>));
                     }
                     else
                     {
@@ -219,7 +229,7 @@ namespace bkrp
             try
             {
                 deep += 1;
-                if (deep > 10)
+                if (deep > 100)
                 {
                     Log.Error("克隆深度超过极限");
                     return "Too Deep!";
