@@ -79,7 +79,7 @@ namespace bkrp
                                             max_character = reader.GetInt32("max_character")
                                         };
                                         EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
-                                        SelectCharacter(player);
+                                        SelectCharacter(player as PlayerEx);
                                     }
                                 });
                             }
@@ -115,7 +115,7 @@ namespace bkrp
                                 max_character = reader.GetInt32("max_character")
                             };
                             EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
-                            SelectCharacter(player);
+                            SelectCharacter(player as PlayerEx);
                             return;
                         }
                         else
@@ -128,7 +128,7 @@ namespace bkrp
             });
         }
 
-        public static void SelectCharacter(IPlayer player)
+        public static void SelectCharacter(PlayerEx player)
         {
             /*
             player.Dimension = 100 + player.Id;
@@ -142,11 +142,25 @@ namespace bkrp
                 player.Emit("character:load");
             });
             */
-            player.Dimension = 0;
-            player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
-            player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
-            player.Model = 0xD1FEB884;
-            player.Emit("account:destroy");
+            Database.ExecuteSql($"SELECT * FROM `character` WHERE `uid`='{player.Account.id}'", (reader, err) =>
+            {
+                if(err)
+                {
+                    player.SendErrorNotification("数据库异常抛出");
+                    return;
+                }
+                while(reader.Read())
+                {
+                    player.Character = new PlayerCharacter(player.Account.id, reader.GetString("name"), reader.GetInt32("money"), reader.GetInt32("bank"), reader.GetInt32("age"), reader.GetInt32("level"), reader.GetInt32("exp"),
+                        reader.GetInt32("thirst"), reader.GetInt32("hunger"));
+                    player.Dimension = 0;
+                    player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
+                    player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
+                    player.Model = 0xD1FEB884;
+                    player.Emit("account:destroy");
+                    break;
+                }
+            });
         }
 
         public static void SaveCharacter(PlayerEx player)
