@@ -1,2 +1,3 @@
-import './camera'
-import './notification'
+import './camera';
+import './notification';
+import './skycam';
