@@ -130,6 +130,7 @@ namespace bkrp
 
         public static void SelectCharacter(IPlayer player)
         {
+            /*
             player.Dimension = 100 + player.Id;
             player.Emit("freeze:toggle", true);
             player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
@@ -140,6 +141,12 @@ namespace bkrp
                 player.Emit("account:destroy");
                 player.Emit("character:load");
             });
+            */
+            player.Dimension = 0;
+            player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
+            player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
+            player.Model = 0xD1FEB884;
+            player.Emit("account:destroy");
         }
 
         public static void SaveCharacter(PlayerEx player)

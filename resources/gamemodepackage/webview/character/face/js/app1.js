@@ -152,7 +152,6 @@ function LoadNewCharacter(arr_data) {
 }
 
 function OnRangeChange(id, val, data) {
-    console.log(id, val);
     alt.emit('face:client-onChange', id, val);
 }
 

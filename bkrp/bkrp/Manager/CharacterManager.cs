@@ -284,6 +284,7 @@ namespace bkrp
             OnClientSetTraje(player, traje);
         }
 
+        [ClientEvent("ClientSetTraje")]
         public static void OnClientSetTraje(PlayerEx player, int valueIndex)
         {
             player.SetMetaData("creator_outfit", valueIndex);
@@ -349,7 +350,6 @@ namespace bkrp
                     break;
             }
         }
-
 
         [ClientEvent("ClientSetFaceFeature")]
         public static void OnClientSetFaceFeature(PlayerEx player, int type, int valueIndex)

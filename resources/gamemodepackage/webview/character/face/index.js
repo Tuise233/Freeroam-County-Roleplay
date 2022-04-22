@@ -137,7 +137,7 @@ alt.onServer('face:load2', (data) => {
         });
 
         faceView.on('face2:client-setFaceFeature', (id, value) => {
-            alt.emitServer('ClientSetFaceFeature', String(id), String(value));
+            alt.emitServer('ClientSetFaceFeature', Number(id), Number(value));
         });
     }
 });
@@ -167,7 +167,11 @@ alt.onServer('face:load3', (data) => {
         });
 
         faceView.on('face3:client-setClothes', (type, value) => {
-
+            switch(type){
+                case 'traje':
+                    alt.emitServer('ClientSetTraje', Number(value));
+                    break;
+            }
         });
     }
 });
