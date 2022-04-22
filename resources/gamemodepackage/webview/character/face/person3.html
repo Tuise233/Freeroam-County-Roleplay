@@ -1,68 +1,87 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="zh-CN">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<!-- Stylesheets (Semantic, Font Awesome, and Fonts -->
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.2.0/css/all.css">
+		<link rel="stylesheet" href="./css/semantic-ui-range-1.0.1.css">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		  <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style class="text/css">
+		.ui.hiddden.divider {
+			content: "\A";
+		}
+		body {
+			background-color: rgba(0,0,0,0);
+		}
+		</style>
+	</head>
 
-<head>
+	<body>
+<br>
+		<div class="ui one column grid">
+			<div class="four wide column">
+				<div style="margin-left:40px;">
+					<div class="ui teal attached segment">
+						<div class="ui teal ribbon label">第4步</div>
+						<label class="ui center aligned">更换形象</label>
+					</div>
 
-	<meta charset="utf-8">
-	<!-- <base href="/"> -->
-	<meta name="description" content="Texas RP">
+					<div class="ui attached segment">
+						<label class="ui center aligned">服装</label>
+						<div class="ui teal range" id="traje"></div>
+					
+						<!--<label class="ui center aligned">Traje</label>
+						<div class="ui teal range" id="top"></div>
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="../../assets/css/range.css">
-  <link rel="stylesheet" href="./normalize.css">
-  <link rel="stylesheet" href="./stylenorm.css">
+						<label class="ui center aligned">Pants</label>
+						<div class="ui teal range" id="pants"></div>
 
-</head>
+						<label class="ui center aligned">Shoes</label>
+						<div class="ui teal range" id="shoes"></div>-->
+					</div>
+					<div class="ui two bottom attached buttons">
+						<div class="ui teal button" id="charcreation_back">返回</div>
+						<div class="ui green button" id="charcreation_next">创建</div>
+					</div>
 
-<body class="create">
-
-  <div class="create-char create-char-3">
-
-		<div class="step">
-			<div class="step-header">
-				<span class="step-title underline">请选择您的服装</span>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">服装</span>
-					<span class="slider-value" id="traje-display"></span>
+					<div class="ui warning message">
+						<i class="icon info"></i>你的角色稍后可以购买新衣服和首饰.
+					</div>
 				</div>
-				<div class="slider">
-					<div class="ui range" id="traje"></div>
+			</div>
+			<div class="right floated two wide column" style="margin-right:30px;">
+				<div class="ui segments" >
+					<div class="ui teal segment">
+						<h3 class="ui center aligned header">
+							人物
+						</h3>
+					</div>
+					<div class="ui bottom center aligned attached segment">
+						<div class="ui two bottom attached buttons">
+							<div class="ui blue button" id="charcreation_head">头部</div>
+							<div class="ui blue button" id="charcreation_body">身体</div>
+						</div>
+						<h3 class="ui horizontal header divider">旋转</h3>
+						<div class="ui teal range" id="range_rotation"></div>
+					</div>
 				</div>
 			</div>
-
-			<div class="step-buttons">
-				<div class="button button-dark" id="charcreation_back"><i class="fas fa-sign-out-alt" style="transform: rotate(180deg);"></i>返回</div>
-				<div class="button button-yellow" id="charcreation_next">下一步</div>
-			</div>
-
-			<div class="message-custom">
-				<div class="icon"><i class="fas fa-info"></i></div>
-				<p class="text">
-				  	   您以后可以前往服装店购买衣服
-				</p>
-			</div>
-			
 		</div>
 
-	</div>
-
-	<div class="camera">
-		<span class="camera-title">相机</span>
-		<div class="camera-buttons">
-			<div class="button button-dark" id="charcreation_head">面部</div>
-			<div class="button button-dark" id="charcreation_body">全身</div>
-		</div>
-		<span class="camera-title rotate">角度</span>
-		<div class="ui range" id="range_rotation"></div>
-	</div>
-
-	<script src="../../assets/js/jquery.min.js"></script>
-	<script src="../../assets/js/semantic-ui-range-1.0.1.js"></script>
-	<script src="../../assets/js/semantic-ui-2.3.1.min.js"></script>
-    <script src="./js/app3.js"></script>
-</body>
+		<!-- Javascript (jQuery, Semantic) -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+		<script src="./js/semantic-ui-range-1.0.1.js"></script>
+		<script src="./js/app3.js"></script>
+	</body>
 </html>

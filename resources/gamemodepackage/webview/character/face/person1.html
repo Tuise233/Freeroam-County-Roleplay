@@ -1,201 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> -->
+		<!-- Stylesheets (Semantic, Font Awesome, and Fonts -->
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.2.0/css/all.css">
+		<link rel="stylesheet" href="./css/semantic-ui-range-1.0.1.css">
 
-<head>
+		<style class="text/css">
+		.ui.hiddden.divider {
+			content: "\A";
+		}
+		body {
+			background-color: rgba(0,0,0,0);
+		}
+		.setup-label {
+			float: right;
+		}
+		</style>
+	</head>
 
-	<meta charset="utf-8">
-	<!-- <base href="/"> -->
-
-	<meta name="description" content="RP">
-
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- <link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/range.css">
-  <link rel="stylesheet" href="css/stylenorm.css"> -->
-  	<link rel="stylesheet" href="../../assets/css/range.css">
-	<link rel="stylesheet" href="./normalize.css">
-	<link rel="stylesheet" href="./stylenorm.css">
-</head>
-
-<body class="create">
-
-  <div class="create-char">
-
-		<div class="step">
-
-			<div class="step-header">
-				<span class="step-title underline">角色信息</span>
-			</div>
-
-			<form class="ui form">
-				<div class="input-container">
-					<div class="input">
-						<input type="text" placeholder="姓名" id="creation_forename">
-					</div>
-					<div class="input">
-						<input type="text" placeholder="名字" id="creation_surname">
-					</div>
-				</div>
-
-				<div class="select-container">
-					<span class="step-title text-center d-block">性别</span>
-					<div class="select-gender" id="creation_gender">
-						<input type="hidden" name="gender" id="gender-value">
-						<div class="gender-button">
-							<div class="gender gender_male button button-dark" data-value="1">男性</div>
-						</div>
-						<div class="gender-button">
-							<div class="gender gender_female button button-dark" data-value="0">女性</div>
-						</div>
-					</div>
-				<div class="input-container" style="margin-left:36%; margin-top:6%; width:28%;">
-					<div class="input">
-						<input name="age" style="text-align:center;" type="number" placeholder="年龄" id="creation_age" >
-					</div>
-				</div>
-				</div>
-				
-				<div class="ui error message"></div>
-			</form>
- 
-		</div>
-
-		<div class="step">
-			<div class="step-header">
-				<span class="step-title underline">第二步</span>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">母亲</span>
-					<span class="slider-value" id="display-base"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_base"></div>
-				</div>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">父亲</span>
-					<span class="slider-value" id="display-base2"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_base2"></div>
-				</div>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">相似度</span>
-					<span class="badge">
-						<i class="fa fa-angle-left"></i>
-						父亲 - 母亲
-						<i class="fa fa-angle-right"></i>
-					</span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_baseblend"></div>
-				</div>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">肤色</span>
-					<span class="badge">
-						<i class="fa fa-angle-left"></i>
-						父亲 - 母亲
-						<i class="fa fa-angle-right"></i>
-					</span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_skin"></div>
-				</div>
-			</div>
-
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">瞳色</span>
-					<span class="slider-value" id="display-eyes"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_eyes"></div>
-				</div>
-			</div>
+	<body>
+	<br>
+		<div style="margin-left:150px;"></div>
+		<div class="ui one column grid">
+			<div class="four wide column">
 			
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">发型</span>
-					<span class="slider-value" id="display-hair"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_hair"></div>
-				</div>
-			</div>
+				<div style="margin-left:40px;">
+					<div class="ui teal attached segment">
+						
+						<div class="ui teal ribbon label">第1步</div>
+						<label class="ui center aligned" id="title">角色信息</label>
+						<br />
+						<br />
+							
+						<form class="ui form">
+							<div class="field">
+								<input type="text" name="first-name" id="creation_forename" placeholder="姓氏">
+							</div>
+							<div class="field">
+								<input type="text" name="last-name" id="creation_surname" placeholder="名称">
+							</div>
+						  	<div class="field">
+							  <div class="ui selection dropdown" id="creation_gender">
+								  <input type="hidden" name="gender">
+								  	<i class="dropdown icon"></i>
+									<div class="default text">性别</div>
+									<div class="menu">
+										  <div class="item" data-value="1">男</div>
+										  <div class="item" data-value="0">女</div>
+								  </div>
+							  </div>
+						  </div>
 
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">发色</span>
-					<span class="slider-value" id="display-haircolor"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_haircolor"></div>
-				</div>
-			</div>
+						  <div class="ui error message"></div>
+					</div>
 
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">高光发色</span>
-					<span class="slider-value" id="display-haircolor2"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_haircolor2"></div>
-				</div>
-			</div>
+					<div class="ui attached segment">
+						<div class="ui teal ribbon label">第2步</div>
+						<br />
 
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">眉毛</span>
-					<span class="slider-value" id="display-eyebrows"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_eyebrows"></div>
-				</div>
-			</div>
+						<label class="ui center aligned">父亲</label>
+						<div class="setup-label ui black label" id="display-base"></div>
+						<div class="ui teal range" id="range_base"></div>
+						
+						<label class="ui center aligned">母亲</label>
+						<div class="setup-label ui black label" id="display-base2"></div>
+						<div class="ui teal range" id="range_base2"></div>
+						
+						<label class="ui center aligned">相似度</label>
+						<div class="setup-label ui yellow label"><i class="angle left icon"></i><span style="opacity:00;">----</span>父亲 - 母亲<span style="opacity:00;">------</span><i class="angle right icon"></i></div>
+						<div class="ui teal range" id="range_baseblend"></div>
 
-			<div class="slider-container">
-				<div class="slider-header">
-					<span class="setting-name">胡须</span>
-					<span class="slider-value" id="display-beard"></span>
-				</div>
-				<div class="slider">
-					<div class="ui range" id="range_beard"></div>
-				</div>
-			</div>
+						<label class="ui center aligned">肤色</label>
+						<div class="setup-label ui yellow label"><i class="angle left icon"></i><span style="opacity:00;">----</span>父亲 - 母亲<span style="opacity:00;">------</span><i class="angle right icon"></i></div>
 
-			<div class="step-buttons">
-				<div class="button button-dark" id="charcreation_back"><i class="fas fa-sign-out-alt" style="transform: rotate(180deg);"></i>返回</div>
-				<div class="button button-yellow" id="charcreation_next">下一步</div>
+						<div class="ui teal range" id="range_skin"></div>
+
+						<label class="ui center aligned">眼睛颜色</label>
+						<div class="setup-label ui black label" id="display-eyes"></div>
+						<div class="ui teal range" id="range_eyes"></div>
+
+						<label class="ui center aligned">头发</label>
+						<div class="setup-label ui black label" id="display-hair"></div>
+						<div class="ui teal range" id="range_hair"></div>
+
+						<label class="ui center aligned">主发色</label>
+						<div class="setup-label ui black label" id="display-haircolor"></div>
+						<div class="ui teal range" id="range_haircolor"></div>
+
+						<label class="ui center aligned">副发色</label>
+						<div class="setup-label ui black label" id="display-haircolor2"></div>
+						<div class="ui teal range" id="range_haircolor2"></div>
+
+						<label class="ui center aligned">眉毛</label>
+						<div class="setup-label ui black label" id="display-eyebrows"></div>
+						<div class="ui teal range" id="range_eyebrows"></div>
+
+						<label class="ui center aligned">胡须</label>
+						<div class="setup-label ui black label" id="display-beard"></div>
+						<div class="ui teal range" id="range_beard"></div>
+					</div>
+
+					<div class="ui two bottom attached buttons">
+						<div class="ui teal button" id="charcreation_back">返回</div>
+						<div class="ui green button" id="charcreation_next">下一步</div>
+					</div>
+				</div>
 			</div>
-			
+				<div class="right floated two wide column" style="margin-right:30px;">
+				<div class="ui segments">
+					<div class="ui teal segment">
+						<h3 class="ui center aligned header">
+							人物
+						</h3>
+					</div>
+					<div class="ui bottom center aligned attached segment">
+						<div class="ui two bottom attached buttons">
+							<div class="ui blue button" id="charcreation_head">头部</div>
+							<div class="ui blue button" id="charcreation_body">身体</div>
+						</div>
+						<h3 class="ui horizontal header divider">旋转</h3>
+						<div class="ui teal range" id="range_rotation"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 
-	</div>
-
-	<div class="camera">
-		<span class="camera-title">相机</span>
-		<div class="camera-buttons">
-			<div class="button button-dark" id="charcreation_head">面部</div>
-			<div class="button button-dark" id="charcreation_body">全身</div>
-		</div>
-		<span class="camera-title rotate">旋转角度</span>
-		<div class="ui range" id="range_rotation"></div>
-	</div>
-
-	<script src="../../assets/js/jquery.min.js"></script>
-	<script src="../../assets/js/semantic-ui-range-1.0.1.js"></script>
-	<script src="../../assets/js/semantic-ui-2.3.1.min.js"></script>
-	<script src="./js/app1.js"></script>
-</body>
+		<!-- Javascript (jQuery, Semantic) -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+		<script src="./js/semantic-ui-range-1.0.1.js"></script>
+		<script src="./js/app1.js"></script>
+		<script>
+		
+		</script>
+	</body>
 </html>

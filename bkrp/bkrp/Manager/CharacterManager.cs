@@ -18,16 +18,28 @@ namespace bkrp
         public static List<string> mom = new List<string>();
         public static List<string> shape_mix_list = new List<string>();
 
+        public static void SaveCharacterFromCreator(PlayerEx player, string name)
+        {
+            if (player.Feature == null) return;
+            if(player.HasMetaData("ChangedGender")) player.DeleteMetaData("ChangedGender");
+            //player.Emit("skycam:toggle", true);
+            Timer.SetTimeOut(3000, () =>
+            {
+                ApplyCharacter(player);
+            });
+            Log.Server("SaveCharacter");
+        }
+
         [ClientEvent("RequestCreateCharacter")]
         public void RequestCreateCharacter(PlayerEx player)
         {
-            Database.ExecuteSql($"SELECT * FROM `character` WHERE `userid`='{player.Account.id}'", (reader, err) =>
+            Database.ExecuteSql($"SELECT * FROM `character` WHERE `uid`='{player.Account.id}'", (reader, err) =>
             {
                 if(!err)
                 {
                     int count = 0;
                     while(reader.Read())
-                    {
+                    {   
                         count++;
                     }
                     if(count >= player.Account.max_character)
@@ -38,6 +50,7 @@ namespace bkrp
                     player.Emit("freeze:toggle", true);
                     player.Emit("character:destroy");
                     player.Emit("face:createCamera");
+                    ShowPlayerCreator(player, true);
                 }
             });
         }
@@ -58,6 +71,81 @@ namespace bkrp
 
             player.Emit("face:destroy");
             ShowPlayerCreatorTwo(player);
+        }
+
+        [ClientEvent("Display_Creator_part3")]
+        public void DisplayPartThree(PlayerEx player)
+        {
+            player.Emit("face:destroy");
+
+            List<dynamic> temp_array = new List<dynamic>();
+
+            player.GetMetaData("temp_traje", out int traje);
+            player.GetMetaData("temp_top", out int top);
+            player.GetMetaData("temp_pants", out int pants);
+            player.GetMetaData("temp_shoes", out int shoes);
+
+            temp_array.Add(new
+            {
+                Traje = traje,
+                Top = top,
+                Pants = pants,
+                Shoes = shoes
+            });
+
+            player.Emit("face:load3", temp_array.ToJson());
+            UpdateVariables(player);
+        }
+
+        [ClientEvent("ClientCharCreation3Back")]
+        public static void BackToTwo(PlayerEx player)
+        {
+            player.Emit("face:destroy");
+            ShowPlayerCreatorTwo(player);
+        }
+
+        [ClientEvent("ClientCharCreation3Next")]
+        public static void Proccess_Character(PlayerEx player)
+        {
+            player.GetMetaData("temp_name", out string temp_name);
+            player.GetMetaData("temp_second_name", out string second_name);
+            string inputtext = $"{temp_name}_{second_name}";
+            //string inputtext = player.GetData<dynamic>("temp_name") + "_" + player.GetData<dynamic>("temp_second_name");
+
+            if (inputtext.Length > 24)
+            {
+                player.SendErrorNotification("您的名字长度范围在6到24个单位");
+                return;
+            }
+
+            if (inputtext.Contains(" "))
+            {
+                player.SendErrorNotification("您的名字中不能包含空格");
+                return;
+            }
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputtext, "^([A-Z][a-z]+_[A-Z][a-z]+)$") == true)
+            {
+                Database.ExecuteSql($"SELECT * FROM `character` WHERE `name`='{inputtext}'", (reader, err) =>
+                {
+                    if(err)
+                    {
+                        player.SendErrorNotification("数据库异常抛出");
+                        return;
+                    }
+                    while(reader.Read())
+                    {
+                        player.SendErrorNotification("您输入的名字已经被注册");
+                        return;
+                    }
+                });
+                SaveCharacterFromCreator(player, inputtext);
+            }
+            else
+            {
+                player.SendErrorNotification("这不是一个可角色扮演的名字");
+                player.SendInfoNotification("举例: Brandon_karl");
+            }
         }
 
         public static void ShowPlayerCreatorTwo(PlayerEx player)
@@ -95,6 +183,7 @@ namespace bkrp
             ShowPlayerCreator(player, true);
         }
 
+        [ClientEvent("ShowPlayerCreator")]
         public static void ShowPlayerCreator(PlayerEx player, bool reset_variable = false)
         {
             if (reset_variable == true)
@@ -176,7 +265,6 @@ namespace bkrp
             player.GetMetaData("temp_hcolor", out int hcolor);
             player.GetMetaData("temp_eyebrows", out int eyebrows);
             player.GetMetaData("temp_beard", out int beard);
-
             OnClientOnRangeChange(player, "range_base", base1.ToString());
             OnClientOnRangeChange(player, "range_base2", base2.ToString());
             OnClientOnRangeChange(player, "range_baseblend", blend.ToString());
@@ -187,13 +275,11 @@ namespace bkrp
             OnClientOnRangeChange(player, "range_haircolor2", hcolor.ToString());
             OnClientOnRangeChange(player, "range_eyebrows", eyebrows.ToString());
             OnClientOnRangeChange(player, "range_beard", beard.ToString());
-
             for(int i = 0; i < 20; i++)
             {
                 player.GetMetaData("temp_facefeature_" + i, out int value);
                 OnClientSetFaceFeature(player, i, value);
             }
-
             player.GetMetaData("temp_traje", out int traje);
             OnClientSetTraje(player, traje);
         }
@@ -300,179 +386,188 @@ namespace bkrp
         [ClientEvent("ClientOnRangeChange")]
         public static void OnClientOnRangeChange(PlayerEx player, string type, string valueIndex)
         {
-            if (type == "range_gender")
+            try
             {
-                int value = Convert.ToInt32(valueIndex);
-                if (player.Feature == null) return;
+                if (type == "range_gender")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    if (player.Feature == null) return;
 
-                int sex = 0;
-                if (value == 0)
-                {
-                    player.Model = 0x9C9EFFD8;
-                    player.SetSyncedMetaData("CHARACTER_ONLINE_GENRE", 1);
-                    sex = 1;
-                }
-                else if (value == 1)
-                {
-                    player.Model = 0x705E61F2;
-                    player.SetSyncedMetaData("CHARACTER_ONLINE_GENRE", 0);
-                    sex = 0;
-                }
+                    int sex = 0;
+                    if (value == 0)
+                    {
+                        player.Model = 0x9C9EFFD8;
+                        player.SetSyncedMetaData("CHARACTER_ONLINE_GENRE", 1);
+                        sex = 1;
+                    }
+                    else if (value == 1)
+                    {
+                        player.Model = 0x705E61F2;
+                        player.SetSyncedMetaData("CHARACTER_ONLINE_GENRE", 0);
+                        sex = 0;
+                    }
 
 
-                player.SetMetaData("ChangedGender", true);
-                SetDefaultFeature(player, sex, true);
-                player.SetMetaData("temp_sex", value);
+                    player.SetMetaData("ChangedGender", true);
+                    SetDefaultFeature(player, sex, true);
+                    player.SetMetaData("temp_sex", value);
 
-                UpdateVariables(player);
-            }
-            else if (type == "range_base")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                player.Feature.Parents.Mother = value + 20;
-                ApplyCharacterPreview(player);
-                player.SetMetaData("temp_base", value);
-            }
-            else if (type == "range_base2")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                player.Feature.Parents.Father = value;
-                ApplyCharacterPreview(player);
-                player.SetMetaData("temp_base2", value);
-            }
-            else if (type == "range_baseblend")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                float new_value = 0.0f;
-                if (value > 9) return;
-                switch (value)
-                {
-                    case 0: new_value = 0.0f; break;
-                    case 1: new_value = 0.1f; break;
-                    case 2: new_value = 0.2f; break;
-                    case 3: new_value = 0.3f; break;
-                    case 4: new_value = 0.4f; break;
-                    case 5: new_value = 0.5f; break;
-                    case 6: new_value = 0.6f; break;
-                    case 7: new_value = 0.7f; break;
-                    case 8: new_value = 0.8f; break;
-                    case 9: new_value = 0.9f; break;
+                    UpdateVariables(player);
                 }
-                player.Feature.Parents.Similarity = new_value;
-                ApplyCharacterPreview(player);
-                player.SetMetaData("temp_baseblend", value);
-            }
-            else if (type == "range_skin")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                if (value > 9) return;
-                float new_value = 0.0f;
-                switch (value)
+                else if (type == "range_base")
                 {
-                    case 0: new_value = 0.0f; break;
-                    case 1: new_value = 0.1f; break;
-                    case 2: new_value = 0.2f; break;
-                    case 3: new_value = 0.3f; break;
-                    case 4: new_value = 0.4f; break;
-                    case 5: new_value = 0.5f; break;
-                    case 6: new_value = 0.6f; break;
-                    case 7: new_value = 0.7f; break;
-                    case 8: new_value = 0.8f; break;
-                    case 9: new_value = 0.9f; break;
+                    int value = Convert.ToInt32(valueIndex);
+                    player.Feature.Parents.Mother = value + 20;
+                    ApplyCharacterPreview(player);
+                    player.SetMetaData("temp_base", value);
                 }
-                player.Feature.Parents.SkinSimilarity = new_value;
-                ApplyCharacterPreview(player);
-                player.SetMetaData("temp_skin", value);
-            }
-            else if (type == "range_eyes")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                player.Feature.EyeColor = (byte)value;
-                player.SetEyeColor((ushort)player.Feature.EyeColor);
-                //NAPI.Player.SetPlayerEyeColor(player, (byte)player.Feature.EyeColor);
-                player.SetMetaData("temp_eyes", value);
-            }
-            else if (type == "range_hair")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                if (value > 72) return;
-                player.GetSyncedMetaData("CHARACTER_ONLINE_GENRE", out int gender);
-                if(gender == 0)
+                else if (type == "range_base2")
                 {
-                    player.Feature.Hair.Hair = Convert.ToInt32(hair_style_male[value]);
-                    player.SetClothes(2, (ushort)player.Feature.Hair.Hair, 0, 0);
+                    int value = Convert.ToInt32(valueIndex);
+                    player.Feature.Parents.Father = value;
+                    ApplyCharacterPreview(player);
+                    player.SetMetaData("temp_base2", value);
                 }
-                else
+                else if (type == "range_baseblend")
                 {
-                    player.Feature.Hair.Hair = Convert.ToInt32(hair_style_female[value]);
-                    player.SetClothes(2, (ushort)player.Feature.Hair.Hair, 0, 0);
+                    int value = Convert.ToInt32(valueIndex);
+                    float new_value = 0.0f;
+                    if (value > 9) return;
+                    switch (value)
+                    {
+                        case 0: new_value = 0.0f; break;
+                        case 1: new_value = 0.1f; break;
+                        case 2: new_value = 0.2f; break;
+                        case 3: new_value = 0.3f; break;
+                        case 4: new_value = 0.4f; break;
+                        case 5: new_value = 0.5f; break;
+                        case 6: new_value = 0.6f; break;
+                        case 7: new_value = 0.7f; break;
+                        case 8: new_value = 0.8f; break;
+                        case 9: new_value = 0.9f; break;
+                    }
+                    player.Feature.Parents.Similarity = new_value;
+                    ApplyCharacterPreview(player);
+                    player.SetMetaData("temp_baseblend", value);
                 }
-                player.SetMetaData("temp_hair", value);
-            }
-            else if (type == "range_haircolor")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                if (value > 30) return;
-                player.Feature.Hair.Color = value;
-                player.HairColor = (byte)player.Feature.Hair.Color;
-                player.HairHighlightColor = (byte)player.Feature.Hair.HighlightColor;
-                player.SetMetaData("temp_haircolor", value);
-            }
-            else if (type == "range_haircolor2")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                player.Feature.Hair.HighlightColor = value;
-                player.HairHighlightColor = (byte)player.Feature.Hair.HighlightColor;
-                player.SetMetaData("temp_hairhighlightcolor", value);
-            }
-            else if (type == "range_beard")
-            {
-                /*
-                int value = Convert.ToInt32(valueIndex);
-                HeadOverlay headoverlay2 = new HeadOverlay();
-                int index = 1;
-                if (value == 0) player.Feature.Appearance[index].Value = 255;
-                else player.Feature.Appearance[index].Value = value - 1;
-                headoverlay2.Index = (byte)player.Feature.Appearance[index].Value;
-                headoverlay2.Color = (byte)player.Feature.Appearance[index].Color;
-                headoverlay2.Opacity = player.Feature.Appearance[index].Opacity;
-                NAPI.Player.SetPlayerHeadOverlay(player, index, headoverlay2);
-                */
-                int value = Convert.ToInt32(valueIndex);
-                int index = 1;
-                if (value == 0) player.Feature.Appearance[index].Value = 255;
-                else player.Feature.Appearance[index].Value = value - 1;
-                player.SetHeadOverlay((byte)index, (byte)player.Feature.Appearance[index].Value, player.Feature.Appearance[index].Opacity);
-                player.SetMetaData("temp_beard", value);
-            }
-            else if (type == "range_eyebrows")
-            {
-                /*
-                int value = Convert.ToInt32(valueIndex);
-                HeadOverlay headoverlay2 = new HeadOverlay();
-                int index = 2;
-                if (value == 0) player.Feature.Appearance[index].Value = 255;
-                else player.Feature.Appearance[index].Value = value - 1;
-                headoverlay2.Index = (byte)player.Feature.Appearance[index].Value;
-                headoverlay2.Color = (byte)player.Feature.Appearance[index].Color;
-                headoverlay2.Opacity = player.Feature.Appearance[index].Opacity;
-                NAPI.Player.SetPlayerHeadOverlay(player, index, headoverlay2);
-                */
-                int value = Convert.ToInt32(valueIndex);
-                int index = 2;
-                if (value == 0) player.Feature.Appearance[index].Value = 255;
-                else player.Feature.Appearance[index].Value = value - 1;
-                player.SetHeadOverlay((byte)index, (byte)player.Feature.Appearance[index].Value, player.Feature.Appearance[index].Opacity);
-                player.SetMetaData("temp_eyebrows", value);
-            }
-            else if (type == "range_rotation")
-            {
-                int value = Convert.ToInt32(valueIndex);
-                player.Rotation = new Position(0, 0, float.Parse(valueIndex) / 59);
-            }
-            else if (type == "range_elevation")
-            {
+                else if (type == "range_skin")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    if (value > 9) return;
+                    float new_value = 0.0f;
+                    switch (value)
+                    {
+                        case 0: new_value = 0.0f; break;
+                        case 1: new_value = 0.1f; break;
+                        case 2: new_value = 0.2f; break;
+                        case 3: new_value = 0.3f; break;
+                        case 4: new_value = 0.4f; break;
+                        case 5: new_value = 0.5f; break;
+                        case 6: new_value = 0.6f; break;
+                        case 7: new_value = 0.7f; break;
+                        case 8: new_value = 0.8f; break;
+                        case 9: new_value = 0.9f; break;
+                    }
+                    player.Feature.Parents.SkinSimilarity = new_value;
+                    ApplyCharacterPreview(player);
+                    player.SetMetaData("temp_skin", value);
+                }
+                else if (type == "range_eyes")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    player.Feature.EyeColor = (byte)value;
+                    player.SetEyeColor((ushort)player.Feature.EyeColor);
+                    //NAPI.Player.SetPlayerEyeColor(player, (byte)player.Feature.EyeColor);
+                    player.SetMetaData("temp_eyes", value);
+                }
+                else if (type == "range_hair")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    if (value > 72) return;
+                    
+                    player.GetSyncedMetaData("CHARACTER_ONLINE_GENRE", out int gender);
+                    if (gender == 0)
+                    {
+                        player.Feature.Hair.Hair = Convert.ToInt32(hair_style_male[value]);
+                        player.SetClothes(2, (ushort)player.Feature.Hair.Hair, 0, 0);
+                    }
+                    else
+                    {
+                        player.Feature.Hair.Hair = Convert.ToInt32(hair_style_female[value]);
+                        player.SetClothes(2, (ushort)player.Feature.Hair.Hair, 0, 0);
+                    }
+                    player.SetMetaData("temp_hair", value);
+                }
+                else if (type == "range_haircolor")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    if (value > 30) return;
+                    player.Feature.Hair.Color = value;
+                    player.HairColor = (byte)player.Feature.Hair.Color;
+                    player.HairHighlightColor = (byte)player.Feature.Hair.HighlightColor;
+                    player.SetMetaData("temp_haircolor", value);
+                }
+                else if (type == "range_haircolor2")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    player.Feature.Hair.HighlightColor = value;
+                    player.HairHighlightColor = (byte)player.Feature.Hair.HighlightColor;
+                    player.SetMetaData("temp_hairhighlightcolor", value);
+                }
+                else if (type == "range_beard")
+                {
+                    /*
+                    int value = Convert.ToInt32(valueIndex);
+                    HeadOverlay headoverlay2 = new HeadOverlay();
+                    int index = 1;
+                    if (value == 0) player.Feature.Appearance[index].Value = 255;
+                    else player.Feature.Appearance[index].Value = value - 1;
+                    headoverlay2.Index = (byte)player.Feature.Appearance[index].Value;
+                    headoverlay2.Color = (byte)player.Feature.Appearance[index].Color;
+                    headoverlay2.Opacity = player.Feature.Appearance[index].Opacity;
+                    NAPI.Player.SetPlayerHeadOverlay(player, index, headoverlay2);
+                    */
+                    int value = Convert.ToInt32(valueIndex);
+                    int index = 1;
+                    if (value == 0) player.Feature.Appearance[index].Value = 255;
+                    else player.Feature.Appearance[index].Value = value - 1;
+                    player.SetHeadOverlay((byte)index, (byte)player.Feature.Appearance[index].Value, player.Feature.Appearance[index].Opacity);
+                    player.SetMetaData("temp_beard", value);
+                }
+                else if (type == "range_eyebrows")
+                {
+                    /*
+                    int value = Convert.ToInt32(valueIndex);
+                    HeadOverlay headoverlay2 = new HeadOverlay();
+                    int index = 2;
+                    if (value == 0) player.Feature.Appearance[index].Value = 255;
+                    else player.Feature.Appearance[index].Value = value - 1;
+                    headoverlay2.Index = (byte)player.Feature.Appearance[index].Value;
+                    headoverlay2.Color = (byte)player.Feature.Appearance[index].Color;
+                    headoverlay2.Opacity = player.Feature.Appearance[index].Opacity;
+                    NAPI.Player.SetPlayerHeadOverlay(player, index, headoverlay2);
+                    */
+                    int value = Convert.ToInt32(valueIndex);
+                    int index = 2;
+                    if (value == 0) player.Feature.Appearance[index].Value = 255;
+                    else player.Feature.Appearance[index].Value = value - 1;
+                    player.SetHeadOverlay((byte)index, (byte)player.Feature.Appearance[index].Value, player.Feature.Appearance[index].Opacity);
+                    player.SetMetaData("temp_eyebrows", value);
+                }
+                else if (type == "range_rotation")
+                {
+                    int value = Convert.ToInt32(valueIndex);
+                    player.Rotation = new Position(0, 0, float.Parse(valueIndex) / 59);
+                }
+                else if (type == "range_elevation")
+                {
 
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex.Message);
+                Log.Error(ex.StackTrace);
             }
         }
 
@@ -529,7 +624,7 @@ namespace bkrp
                 player.Feature.MakeUp = 0;
                 player.Feature.ChestHairColor = 0;
 
-                for (int i = 0; i < player.Feature.Appearance.Length; i++)
+                for (int i = 0; i < player.Feature.Appearance.Count; i++)
                 {
                     player.SetHeadOverlay((byte)i, 255, 1.0f);
                     player.SetHeadOverlayColor((byte)i, 255, 0, 0);
@@ -539,7 +634,7 @@ namespace bkrp
             SetCreatorClothes(player, gender);
         }
 
-        public static void ApplyCharacter(PlayerEx player)
+        public static void ApplyCharacter   (PlayerEx player)
         {
             if (player.Feature == null) return;
             int gender = player.Feature.Gender;
@@ -566,12 +661,12 @@ namespace bkrp
 
             player.SetEyeColor((ushort)player.Feature.EyeColor);
 
-            for(int i = 0; i < player.Feature.Features.Length; i++)
+            for(int i = 0; i < player.Feature.Features.Count; i++)
             {
                 player.SetFaceFeature((byte)i, player.Feature.Features[i]);
             }
 
-            for(int i = 0; i < player.Feature.Appearance.Length; i++)
+            for(int i = 0; i < player.Feature.Appearance.Count; i++)
             {
                 player.SetHeadOverlay((byte)i, (byte)player.Feature.Appearance[i].Value, (byte)player.Feature.Appearance[i].Opacity);
                 player.SetHeadOverlayColor((byte)i, (byte)player.Feature.Appearance[i].Value, (byte)player.Feature.Appearance[i].Color, (byte)player.Feature.Appearance[i].Color);
@@ -596,23 +691,24 @@ namespace bkrp
 
             player.SetEyeColor((ushort)player.Feature.EyeColor);
 
-            for (int i = 0; i < player.Feature.Features.Length; i++)
+            for (int i = 0; i < player.Feature.Features.Count; i++)
             {
                 player.SetFaceFeature((byte)i, player.Feature.Features[i]);
             }
 
-            for (int i = 0; i < player.Feature.Appearance.Length; i++)
+            for (int i = 0; i < player.Feature.Appearance.Count; i++)
             {
                 player.SetHeadOverlay((byte)i, (byte)player.Feature.Appearance[i].Value, (byte)player.Feature.Appearance[i].Opacity);
                 player.SetHeadOverlayColor((byte)i, (byte)player.Feature.Appearance[i].Value, (byte)player.Feature.Appearance[i].Color, (byte)player.Feature.Appearance[i].Color);
             }
 
             //TattoBusiness.ApplySavedTattoos(player);
+
             player.SetSyncedMetaData("CustomCharacter", player.Feature.ToJson());
         }
     }
 
-    class FaceDataSet
+    class FaceDataSet : IScript
     {
         public FaceDataSet()
         {

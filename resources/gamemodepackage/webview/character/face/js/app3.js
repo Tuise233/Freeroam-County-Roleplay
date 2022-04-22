@@ -1,19 +1,22 @@
-$(document).ready(function () {
-
-    $("#charcreation_back").click(function () {
-        mp.trigger("ClientCharCreation3Back");
+$(document).ready(function() {
+    $('.ui.dropdown').dropdown();
+    
+    $("#charcreation_back").click(function() {
+        //mp.trigger("ClientCharCreation3Back");
+        alt.emit('face3:client-backCreate');
+    });
+    
+    $("#charcreation_next").click(function() {
+        //mp.trigger("ClientCharCreation3Next");
+        alt.emit('face3:client-nextCreate');
     });
 
-    $("#charcreation_next").click(function () {
-        mp.trigger("ClientCharCreation3Next");
+    $("#charcreation_head").click(function() {
+        alt.emit('face3:client-cameraTo', 1);
     });
-
-    $("#charcreation_head").click(function () {
-        mp.trigger("cameraPointTo", 1);
-    });
-
-    $("#charcreation_body").click(function () {
-        mp.trigger("cameraPointTo", 0);
+    
+    $("#charcreation_body").click(function() {
+        alt.emit('face3:client-cameraTo', 0);
     });
 
     $('#range_rotation').range({
@@ -22,9 +25,7 @@ $(document).ready(function () {
         start: 100,
         step: 20,
         smooth: false,
-        onChange: function (val, data) {
-            OnRangeChange("range_rotation", val, null)
-        }
+        onChange: function(val, data) { OnRangeChange("range_rotation", val, null) }
     });
     $('#range_elevation').range({
         min: -2,
@@ -32,15 +33,13 @@ $(document).ready(function () {
         start: 0,
         step: 1,
         smooth: false,
-        onChange: function (val, data) {
-            OnRangeChange("range_elevation", val, null)
-        }
+        onChange: function(val, data) { OnRangeChange("range_elevation", val, null) }
     });
 });
 
 function OnRangeChange(id, val, data) {
     console.log(id, val);
-    mp.trigger("ClientOnRangeChange", id, val);
+    alt.emit('face3:client-onChange', id, val);
 }
 
 function LoadClothing(arr_data) {
@@ -50,9 +49,9 @@ function LoadClothing(arr_data) {
         max: 12,
         start: data.Top,
         smooth: false,
-        onChange: function (val, data) {
-            mp.trigger("ClientSetTraje", val);
-            $('#traje-display').html(val)
+        onChange: function(val, data) {
+            //mp.trigger("ClientSetTraje", val);
+            alt.emit('face3:client-setClothes', 'traje', val);
         }
     });
     $('#top').range({
@@ -60,8 +59,9 @@ function LoadClothing(arr_data) {
         max: 10,
         start: data[0].Top,
         smooth: false,
-        onChange: function (val, data) {
-            mp.trigger("ClientSetTorso", val);
+        onChange: function(val, data) {
+            //mp.trigger("ClientSetTorso", val);
+            alt.emit('face3:client-setClothes', 'torso', val);
         }
     });
     $('#pants').range({
@@ -69,8 +69,9 @@ function LoadClothing(arr_data) {
         max: 10,
         start: data[0].Pants,
         smooth: false,
-        onChange: function (val, data) {
-            mp.trigger("ClientSetPants", val);
+        onChange: function(val, data) {
+            //mp.trigger("ClientSetPants", val);
+            alt.emit('face3:client-setClothes', 'pants', val);
         }
     });
     $('#shoes').range({
@@ -78,8 +79,11 @@ function LoadClothing(arr_data) {
         max: 10,
         start: data[0].Shoes,
         smooth: false,
-        onChange: function (val, data) {
-            mp.trigger("ClientSetShoes", val);
+        onChange: function(val, data) {
+            //mp.trigger("ClientSetShoes", val);
+            alt.emit('face3:client-setClothes', 'shoes', val);
         }
     });
 }
+
+alt.on('face3:view-loadClothing', LoadClothing);

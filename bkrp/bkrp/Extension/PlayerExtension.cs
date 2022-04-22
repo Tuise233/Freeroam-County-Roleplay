@@ -37,9 +37,11 @@ namespace bkrp
         {
             Account = new AccountModel();
             Feature = new PlayerFeature();
+            Character = new PlayerCharacter();
         }
         //New Property
         public AccountModel Account { get; set; }
         public PlayerFeature Feature { get; set; }
+        public PlayerCharacter Character { get; set; }
     }
 }

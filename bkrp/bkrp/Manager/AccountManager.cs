@@ -141,5 +141,10 @@ namespace bkrp
                 player.Emit("character:load");
             });
         }
+
+        public static void SaveCharacter(PlayerEx player)
+        {
+                
+        }
     }
 }

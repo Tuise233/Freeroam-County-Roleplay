@@ -11,6 +11,7 @@ alt.onServer('character:load', (data) => {
     if(characterView == null){
         characterView = new alt.WebView('http://resource/webview/character/index.html');
         characterView.emit('character:view-loadCharacters', data);
+        characterView.emit('character:view-loadCharacters', data);
         characterView.isVisible = true;
         characterView.focus();
         alt.showCursor(true);

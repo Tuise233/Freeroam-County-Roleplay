@@ -17,7 +17,7 @@ function createCamera(x, y, z, rx, ry, rz, fov){
 
 function destroyCamera(){
     if(camera != null){
-        native.destroyCam(camera);
+        native.destroyCam(camera, true);
         camera = null;
     }
 }

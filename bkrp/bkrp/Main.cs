@@ -24,7 +24,6 @@ namespace bkrp
 
         private void Alt_OnPlayerConnect(IPlayer player, string reason)
         {
-            Console.WriteLine(player.Id);
             player.Model = 0x705E61F2;
             player.Spawn(new Position(0f, 0f, 0f), 500);
             player.Dimension = 100 + player.Id;
