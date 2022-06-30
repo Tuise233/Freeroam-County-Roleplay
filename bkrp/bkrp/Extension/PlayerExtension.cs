@@ -33,15 +33,13 @@ namespace bkrp
 
     public class PlayerEx : Player
     {
-        public PlayerEx(IServer server, IntPtr nativePointer, ushort id) : base(server, nativePointer, id)
+        public PlayerEx(ICore server, IntPtr nativePointer, ushort id) : base(server, nativePointer, id)
         {
             Account = new AccountModel();
-            Feature = new PlayerFeature();
-            Character = new PlayerCharacter();
+            Character = new CharacterModel();
         }
         //New Property
         public AccountModel Account { get; set; }
-        public PlayerFeature Feature { get; set; }
-        public PlayerCharacter Character { get; set; }
+        public CharacterModel Character { get; set; }
     }
 }

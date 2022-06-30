@@ -9,7 +9,7 @@ alt.onServer('account:load', () => {
     if(accountView == null){
         alt.showCursor(true);
         accountView = new alt.WebView('http://resource/webview/account/index.html');
-        accountView.isVisible = false;
+        accountView.isVisible = true;
         accountView.focus();
 
         accountView.on('accont:client-Login', (name, password) => {

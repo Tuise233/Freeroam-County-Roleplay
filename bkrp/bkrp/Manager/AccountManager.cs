@@ -34,7 +34,7 @@ namespace bkrp
         public void RegisterAccount(IPlayer player, string username, string password, string email)
         {
             Log.Server($"注册帐号: {username} {password} {email}");
-            Database.ExecuteSql($"SELECT * FROM `account` WHERE `username`='{username}'", (reader, err) =>
+            Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}'", (reader, err) =>
             {
                 if(err)
                 {
@@ -92,7 +92,7 @@ namespace bkrp
         public void LoginAccount(IPlayer player, string username, string password)
         {
             Log.Server($"登录账号: {username} {password}");
-            Database.ExecuteSql($"SELECT * FROM `account` WHERE `username`='{username}'", (reader, err) =>
+            Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}'", (reader, err) =>
             {
                 if(err)
                 {
@@ -151,7 +151,7 @@ namespace bkrp
                 }
                 while(reader.Read())
                 {
-                    player.Character = new PlayerCharacter(player.Account.id, reader.GetString("name"), reader.GetInt32("money"), reader.GetInt32("bank"), reader.GetInt32("age"), reader.GetInt32("level"), reader.GetInt32("exp"),
+                    player.Character = new CharacterModel(player.Account.id, reader.GetString("name"), reader.GetInt32("money"), reader.GetInt32("bank"), reader.GetInt32("age"), reader.GetInt32("level"), reader.GetInt32("exp"),
                         reader.GetInt32("thirst"), reader.GetInt32("hunger"));
                     player.Dimension = 0;
                     player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
