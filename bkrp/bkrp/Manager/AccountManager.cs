@@ -26,6 +26,7 @@ namespace bkrp
         {
             if(!player.HasMetaData("login"))
             {
+                player.Emit("chat:load");
                 player.Emit("account:load");
             }
         }
@@ -126,23 +127,6 @@ namespace bkrp
 
         public static void SelectCharacter(PlayerEx player)
         {
-            //Database.ExecuteSql($"SELECT * FROM `character` WHERE `uid`='{player.Account.id}'", (reader, err) =>
-            //{
-            //    if(err)
-            //    {
-            //        player.SendErrorNotification("数据库异常抛出");
-            //        return;
-            //    }
-            //    while(reader.Read())
-            //    {
-            //        player.Dimension = 0;
-            //        player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
-            //        player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
-            //        player.Model = 0xD1FEB884;
-            //        player.Emit("account:destroy");
-            //        break;
-            //    }
-            //});
             Database.ExecuteSql($"SELECT * FROM `character` WHERE `userid`='${player.Account.id}'", (reader, error) =>
             {
                 if (error)
@@ -167,7 +151,9 @@ namespace bkrp
                 player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
                 player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
                 player.Model = 0xD1FEB884;
+                player.ToggleFreeze(false, false);
                 player.Emit("account:destroy");
+                player.Emit("chat:toggleChatBox", true);
             });
         }
     }
