@@ -33,7 +33,7 @@ namespace bkrp
         [ClientEvent("RegisterAccount")]
         public void RegisterAccount(IPlayer player, string username, string password, string email)
         {
-            Log.Server($"注册帐号: {username} {password} {email}");
+            Log.Server($"[AccountManager] 注册账号 | {username} | {password} | {email}");
             Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}'", (reader, err) =>
             {
                 if(err)
@@ -69,14 +69,12 @@ namespace bkrp
                                     }
                                     else
                                     {
-                                        Log.Server("注册成功");
                                         AccountModel model = new AccountModel
                                         {
                                             id = reader.GetInt32("id"),
                                             username = reader.GetString("username"),
                                             password = reader.GetString("password"),
-                                            email = reader.GetString("email"),
-                                            max_character = reader.GetInt32("max_character")
+                                            email = reader.GetString("email")
                                         };
                                         EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
                                         SelectCharacter(player as PlayerEx);
@@ -91,7 +89,7 @@ namespace bkrp
         [ClientEvent("LoginAccount")]
         public void LoginAccount(IPlayer player, string username, string password)
         {
-            Log.Server($"登录账号: {username} {password}");
+            Log.Server($"[AccountManager] 登录账号 | {username} | {password}");
             Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}'", (reader, err) =>
             {
                 if(err)
@@ -105,14 +103,12 @@ namespace bkrp
                     {
                         if(reader.GetString("password") == password)
                         {
-                            Log.Server("登陆成功");
                             AccountModel model = new AccountModel
                             {
                                 id = reader.GetInt32("id"),
                                 username = reader.GetString("username"),
                                 password = reader.GetString("password"),
-                                email = reader.GetString("email"),
-                                max_character = reader.GetInt32("max_character")
+                                email = reader.GetString("email")
                             };
                             EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
                             SelectCharacter(player as PlayerEx);
@@ -130,42 +126,43 @@ namespace bkrp
 
         public static void SelectCharacter(PlayerEx player)
         {
-            /*
-            player.Dimension = 100 + player.Id;
-            player.Emit("freeze:toggle", true);
-            player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
-            player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
-
-            Timer.SetTimeOut(500, () =>
+            //Database.ExecuteSql($"SELECT * FROM `character` WHERE `uid`='{player.Account.id}'", (reader, err) =>
+            //{
+            //    if(err)
+            //    {
+            //        player.SendErrorNotification("数据库异常抛出");
+            //        return;
+            //    }
+            //    while(reader.Read())
+            //    {
+            //        player.Dimension = 0;
+            //        player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
+            //        player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
+            //        player.Model = 0xD1FEB884;
+            //        player.Emit("account:destroy");
+            //        break;
+            //    }
+            //});
+            Database.ExecuteSql($"SELECT * FROM `character` WHERE `userid`='${player.Account.id}'", (reader, error) =>
             {
-                player.Emit("account:destroy");
-                player.Emit("character:load");
-            });
-            */
-            Database.ExecuteSql($"SELECT * FROM `character` WHERE `uid`='{player.Account.id}'", (reader, err) =>
-            {
-                if(err)
+                if (error)
                 {
-                    player.SendErrorNotification("数据库异常抛出");
+                    Log.Error("SelectCharacter数据库操作异常抛出");
                     return;
                 }
+                bool exist = false;
                 while(reader.Read())
                 {
-                    player.Character = new CharacterModel(player.Account.id, reader.GetString("name"), reader.GetInt32("money"), reader.GetInt32("bank"), reader.GetInt32("age"), reader.GetInt32("level"), reader.GetInt32("exp"),
-                        reader.GetInt32("thirst"), reader.GetInt32("hunger"));
-                    player.Dimension = 0;
-                    player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
-                    player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
-                    player.Model = 0xD1FEB884;
-                    player.Emit("account:destroy");
+                    Log.Server("用户有角色");
+                    exist = true;
                     break;
                 }
-            });
-        }
 
-        public static void SaveCharacter(PlayerEx player)
-        {
-                
+                if(exist == false)
+                {
+                    Log.Server("用户没有创建角色");
+                }
+            });
         }
     }
 }

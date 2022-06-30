@@ -12,6 +12,13 @@ namespace bkrp
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public int max_character { get; set; }
+
+        public AccountModel()
+        {
+            this.id = -1;
+            this.username = "undefined";
+            this.password = "undefined";
+            this.email = "undefined";
+        }
     }
 }

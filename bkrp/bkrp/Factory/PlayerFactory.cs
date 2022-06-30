@@ -28,7 +28,8 @@ namespace bkrp
             if (Players.Contains(arg1))
             {
                 Players.Remove(arg1);
-                Log.Server($" [PlayerFactory]ID为{arg1.Id}的玩家被移出PlayerFactory，原因:{arg2}");
+                //Log.Server($" [PlayerFactory] ID为{arg1.Id}的玩家被移出PlayerFactory，原因:{arg2}");
+                Log.Server($"[PlayerFactory] 移除玩家 | {arg1.Account.username} | {arg2}");
             }
         }
 
@@ -37,7 +38,7 @@ namespace bkrp
             if (!Players.Contains(obj))
             {
                 Players.Add(obj);
-                Log.Server($" [PlayerFactory]ID为{obj.Id}的玩家被加入PlayerFactory");
+                Log.Server($"[PlayerFactory] 新增玩家 | {obj.Account.username}");
             }
         }
     }
