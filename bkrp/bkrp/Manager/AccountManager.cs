@@ -34,7 +34,7 @@ namespace bkrp
         public void RegisterAccount(IPlayer player, string username, string password, string email)
         {
             Log.Server($"[AccountManager] 注册账号 | {username} | {password} | {email}");
-            Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}'", (reader, err) =>
+            Database.ExecuteSql($"SELECT * FROM `account` WHERE BINARY `username`='{username}' OR `email`='{email}'", (reader, err) =>
             {
                 if(err)
                 {
@@ -45,7 +45,7 @@ namespace bkrp
                 {
                     while(reader.Read())
                     {
-                        player.Emit("account:client-displayErr", "您输入的用户名已被注册");
+                        player.Emit("account:client-displayErr", "您输入的用户名或邮箱已被注册");
                         return;
                     }
 
@@ -162,6 +162,12 @@ namespace bkrp
                 {
                     Log.Server("用户没有创建角色");
                 }
+
+                player.Dimension = 0;
+                player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
+                player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
+                player.Model = 0xD1FEB884;
+                player.Emit("account:destroy");
             });
         }
     }

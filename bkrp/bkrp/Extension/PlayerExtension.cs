@@ -29,6 +29,17 @@ namespace bkrp
         {
             player?.Emit("SendWarnNotification", msg);
         }
+
+        /// <summary>
+        /// 冻结玩家
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="freezeControl">是否冻结玩家控制</param>
+        /// <param name="freezePosition">是否冻结玩家位置</param>
+        public static void ToggleFreeze(this PlayerEx player, bool freezeControl, bool freezePosition)
+        {
+            player.Emit("freeze:toggle", freezeControl, freezePosition);
+        }
     }
 
     public class PlayerEx : Player

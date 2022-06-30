@@ -3,10 +3,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
+const localPlayer = alt.Player.local;
+
 let freeze = false;
 
-alt.onServer('freeze:toggle', (state) => {
+alt.onServer('freeze:toggle', (state, position) => {
     freeze = state;
+    native.freezeEntityPosition(localPlayer, position);
 });
 
 alt.everyTick(() => {
