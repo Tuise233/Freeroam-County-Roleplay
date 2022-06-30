@@ -40,6 +40,16 @@ namespace bkrp
         {
             player.Emit("freeze:toggle", freezeControl, freezePosition);
         }
+
+        /// <summary>
+        /// 显示鼠标
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="state">显示状态</param>
+        public static void ShowCursor(this PlayerEx player, bool state)
+        {
+            player.Emit("cursor:show", state);
+        }
     }
 
     public class PlayerEx : Player
