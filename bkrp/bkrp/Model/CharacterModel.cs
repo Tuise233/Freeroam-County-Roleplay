@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace bkrp
 {
-    public class PlayerCharacter
+    public class CharacterModel
     {
         public int id { get; set; }
         public int uid { get; set; }
@@ -19,7 +19,7 @@ namespace bkrp
         public int thirst { get; set; }
         public int hunger { get; set; }
 
-        public PlayerCharacter()
+        public CharacterModel()
         {
             this.uid = -1;
             this.name = "";
@@ -32,7 +32,7 @@ namespace bkrp
             this.hunger = 100;
         }
 
-        public PlayerCharacter(int uid, string name, int money, int bank, int age, int level, int exp, int thirst, int hunger)
+        public CharacterModel(int uid, string name, int money, int bank, int age, int level, int exp, int thirst, int hunger)
         {
             this.uid = uid;
             this.name = name;
