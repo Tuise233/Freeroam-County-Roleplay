@@ -39,14 +39,14 @@ namespace bkrp
             {
                 if(err)
                 {
-                    player.Emit("accont:client-displayErr", "数据库异常抛出");
+                    player.Emit("account:displayErr", "数据库异常抛出");
                     return;
                 }
                 else
                 {
                     while(reader.Read())
                     {
-                        player.Emit("account:client-displayErr", "您输入的用户名或邮箱已被注册");
+                        player.Emit("account:displayErr", "您输入的用户名或邮箱已被注册");
                         return;
                     }
 
@@ -55,7 +55,7 @@ namespace bkrp
                         {
                             if (err)
                             {
-                                player.Emit("accont:client-displayErr", "数据库异常抛出");
+                                player.Emit("account:displayErr", "数据库异常抛出");
                                 return;
                             }
                             else
@@ -65,7 +65,7 @@ namespace bkrp
                                 {
                                     if(err)
                                     {
-                                        player.Emit("accont:client-displayErr", "数据库异常抛出");
+                                        player.Emit("account:displayErr", "数据库异常抛出");
                                         return;
                                     }
                                     else
@@ -95,13 +95,15 @@ namespace bkrp
             {
                 if(err)
                 {
-                    player.Emit("accont:client-displayErr", "数据库异常抛出");
+                    player.Emit("account:displayErr", "数据库异常抛出");
                     return;
                 }
                 else
                 {
+                    bool exist = false;
                     while(reader.Read())
                     {
+                        exist = true;
                         if(reader.GetString("password") == password)
                         {
                             AccountModel model = new AccountModel
@@ -113,13 +115,16 @@ namespace bkrp
                             };
                             EventManager.Call_OnPlayerLogin(player as PlayerEx, model);
                             SelectCharacter(player as PlayerEx);
-                            return;
                         }
                         else
                         {
-                            player.Emit("account:client-displayErr", "您输入的账号或密码有误");
-                            return;
+                            player.Emit("account:displayErr", "您输入的账号或密码有误");
                         }
+                    }
+
+                    if(exist == false)
+                    {
+                        player.Emit("account:displayErr", $"未找到用户名未{username}的帐号");
                     }
                 }
             });

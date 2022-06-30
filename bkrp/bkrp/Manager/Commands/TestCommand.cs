@@ -12,7 +12,7 @@ namespace bkrp
     {
         public TestCommand()
         {
-            CommandManager.AddCommand("getpos", (player, param) =>
+            CommandManager.AddCommand("getpos", (player, args) =>
             {
                 ChatBox.SendChatMsgToPlayer(player, $"当前位置坐标: {player.Position.X}, {player.Position.Y}, {player.Position.Z}");
                 ChatBox.SendChatMsgToPlayer(player, $"当前角度坐标: {player.Rotation.Roll}, {player.Rotation.Pitch}, {player.Rotation.Yaw}");

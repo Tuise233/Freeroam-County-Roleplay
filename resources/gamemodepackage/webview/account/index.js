@@ -47,6 +47,10 @@ alt.onServer("account:load", () => {
 
             alt.emitServer("RegisterAccount", name, password, email);
         });
+
+        accountView.on("account:client-playSound", (index) => {
+            alt.emit("sound:play", index);
+        });
     }
 });
 
@@ -59,7 +63,7 @@ alt.onServer("account:destroy", () => {
     }
 });
 
-alt.onServer("account:client-displayErr", displayErr);
+alt.onServer("account:displayErr", displayErr);
 function displayErr(type){
     accountView.emit("account:view-displayErrorMsg", type);
 }
