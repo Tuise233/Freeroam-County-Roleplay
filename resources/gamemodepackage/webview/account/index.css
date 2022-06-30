@@ -1,101 +1,96 @@
-::selection {
-    background: rgba(0, 0, 0, 0.2)!important;
-  }
-  body {
-      /*
-      background-image: url('./img/bg.jpg');
-      background-size: cover;
-      */
-      font-family: 'Fjalla One', sans-serif;
-      letter-spacing: 0.6px;
-      user-select: none;
-  }
-  .panel {
-      margin-top: 13%;
-      border-radius: 0px; background: rgba(238, 227, 227, 0.7); color: rgb(94, 83, 83)!important;
-  }
-  .panel-title {
-      margin-top: 10px;
-      font-size: 24px!important;
-  }
-  .alert {
-      text-transform: uppercase;
-  }
-  .rules {
-      color: rgb(94, 83, 83)!important;
-      box-shadow: none!important;
-  }
-  .label {
-      font-size: 12px;
-      font-weight: 400;
-  }
-  .panel-control {
-      color: rgb(94, 83, 83)!important;
-  }
-  .text-main {
-      color: rgb(94, 83, 83);
-      text-transform: uppercase;
-  }
-  .active a {
-      box-shadow: none!important;
-  }
-  .rules {
-      color: #339af0!important;
-  }
-  .login-bg {
-      background: url('./assets/bg.jpg');
-      background-size: cover;
-      height: 180px;
-  }
-  input {
-      background-color: rgba(0,0,0,0.2)!important;
-      font-size: 18px!important;
-      color: rgb(231, 231, 231)!important;
-      text-align: center;
-      border: none;
-      border-radius: 0px!important;
-      transition: none!important;
-  }
-  input:focus {
-      border: none;
-  }
-  th {
-      color: rgb(94, 83, 83)!important;
-  }
-  h3 {
-      color: rgb(94, 83, 83)!important;
-      font-size: 18px!important;
-  }
-  
-      @keyframes animationBeat {
-      0%   {transform: scale(1); filter:brightness(1);}
-      50%  {transform: scale(1.03); filter:brightness(1.2);}
-      100%   {transform: scale(1); filter:brightness(1);}
-  }
-  
-  #logo {
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-  }
-  #logo img {
+*{
+    padding: 0;
+    margin: 0;
+    user-select: none;   
+}
 
-    animation-name: animationBeat;
-    animation-duration: 0.60s;
-    animation-iteration-count: infinite;
-  }
-  video{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-  }
+html, body{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-  .bgimg{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      left: 50%;
-      top: 50%;
-  }
+@font-face {
+    font-family: "PingFang";
+    src: url("../assets/font/pingfang.ttf");
+}
+
+.container{
+    width: 550px;
+    height: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 40%;
+    font-family: "PingFang";
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 1.0s all;
+    outline: none;
+}
+
+.container input{
+    border-style: none;
+    width: 280px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: -10px;
+    margin-top: 5px;
+    color: rgb(228, 224, 224);
+    text-align: center;
+}
+
+.loginPage,
+.registerPage{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "PingFang";
+    font-weight: bold;
+}
+
+.loginBtn,
+.registerBtn{
+    width: 300px;
+    height: 40px;
+    margin-top: 25px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(204, 50, 50);
+    font-family: "PingFang";
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.loginBtn:hover,
+.registerBtn:hover{
+    background-color: rgb(231, 83, 83);
+}
+
+.registerSpan,
+.forgetSpan,
+.loginSpan{
+    transition: 0.2s all;
+    cursor: pointer;
+}
+
+.registerSpan:hover,
+.forgetSpan:hover,
+.loginSpan:hover{
+    color: white;
+}
