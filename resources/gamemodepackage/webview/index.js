@@ -1,2 +1,1 @@
 import "./account";
-import "./character";
