@@ -65,7 +65,11 @@ const app = new Vue({
             if(this.history.length >= 15){
                 this.history.splice(0, 1);
             }
-            this.history.push(message);
+            let date = new Date();
+            let hour = date.getHours().toString().length == 1 ? `0${date.getHours()}` : date.getHours();
+            let minute = date.getMinutes().toString().length == 1 ? `0${date.getMinutes()}` : date.getMinutes();
+            let second = date.getSeconds().toString().length == 1 ? `0${date.getSeconds()}` : date.getSeconds();
+            this.history.push(`<font color='#3CB371'>[${hour}:${minute}:${second}]</font> ${message}`);
             this.$nextTick(() => {
                 this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
             });
