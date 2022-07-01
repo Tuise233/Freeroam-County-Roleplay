@@ -24,7 +24,7 @@ namespace bkrp
             {
                 if(player.Position.Distance(target.Position) < 30)
                 {
-                    SendChatMsgToPlayer(target, $"[{player.Account.id}]{player.Account.username}: {message}");
+                    SendChatMsgToPlayer(target, $"[{player.Account.id}]{player.Character.name}: {message}");
                 }
             });
         }
