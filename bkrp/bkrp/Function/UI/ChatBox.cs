@@ -9,6 +9,14 @@ namespace bkrp
 {
     class ChatBox : IScript
     {
+        public ChatBox()
+        {
+            EventManager.OnPlayerComeInWorld += (player) =>
+            {
+                player.Emit("chat:toggleChatBox", true);
+            };
+        }
+
         [ClientEvent("PushMessage")]
         public static void PushMessage(PlayerEx player, string message)
         {
@@ -76,6 +84,9 @@ namespace bkrp
         public const string Color_LightBlue = "#5CACEE";
         public const string Color_DeepBlue = "#00008B";
 
-        public const string Color_NearBy = "##8968CD";
+
+        //功能颜色
+        public const string Color_NearBy = "#8968CD";
+        public const string Color_System = "#F0E68C";
     }
 }
