@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BKRP - Character</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        <div class="title">
+            <div style="height: 100%; width: 5px; background-color: rgb(60, 60, 238);"></div>
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span>创建你的角色</span>
+            </div>
+        </div>
+
+        <div class="createList">
+            <div class="createItem">
+                <div style="height: 100%; width: 5px; background-color: rgb(60, 60, 238);"></div>
+                <div style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <span>角色姓名</span>
+                    <input type="text" maxlength="18" v-model="name">
+                </div>
+            </div>
+
+            <div class="createItem">
+                <div style="height: 100%; width: 5px; background-color: rgb(60, 60, 238);"></div>
+                <div style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <span>角色年龄</span>
+                    <input type="number" min="18" max="65" maxlength="3" v-model="age">
+                </div>
+            </div>
+
+            <div class="createItem">
+                <div style="height: 100%; width: 5px; background-color: rgb(60, 60, 238);"></div>
+                <div style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <span>角色性别</span>
+                    <div style="display: flex; align-items: center;">
+                        <button :class="sex == 1 ? 'focusBtn' : 'unfocusBtn'" v-on:click="toggleSex(1)">男性</button>
+                        <button :class="sex == 0 ? 'focusBtn' : 'unfocusBtn'" v-on:click="toggleSex(0)">女性</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="createItem">
+                <div style="height: 100%; width: 5px; background-color: rgb(60, 60, 238);"></div>
+                <div style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    <span>角色模型</span>
+                    <button style="width: 275px;" class="unfocusBtn" v-on:click="randomModel">随机</button>
+                </div>
+            </div>
+
+            <button class="createBtn" v-on:click="createCharacter">创建角色</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/vue.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

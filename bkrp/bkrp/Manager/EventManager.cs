@@ -25,9 +25,15 @@ namespace bkrp
         /// <param name="player"></param>
         public static event Action<PlayerEx, AccountModel> OnPlayerLogin = null;
 
+        /// <summary>
+        /// 当玩家进入游戏世界
+        /// </summary>
+        public static event Action<PlayerEx> OnPlayerComeInWorld = null;
+
         //调用
         public static void Call_OnPlayerConnected(IPlayer player) => OnPlayerConnected?.Invoke(player as PlayerEx);
         public static void Call_OnPlayerDisconnected(PlayerEx player, string reason) => OnPlayerDisconnected?.Invoke(player, reason);
         public static void Call_OnPlayerLogin(PlayerEx player, AccountModel model) => OnPlayerLogin?.Invoke(player, model);
+        public static void Call_OnPlayerComeInWorld(PlayerEx player) => OnPlayerComeInWorld?.Invoke(player);
     }
 }

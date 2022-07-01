@@ -14,7 +14,19 @@ namespace bkrp
         public AccountManager()
         {
             EventManager.OnPlayerConnected += EventManager_OnPlayerConnected;
+            EventManager.OnPlayerDisconnected += EventManager_OnPlayerDisconnected;
             EventManager.OnPlayerLogin += EventManager_OnPlayerLogin;
+            EventManager.OnPlayerComeInWorld += EventManager_OnPlayerComeInWorld;
+        }
+
+        private void EventManager_OnPlayerComeInWorld(PlayerEx player)
+        {
+            ChatBox.SendChatMsgToAll(ChatColor.Color_System, $"[系统] 玩家 {player.Character.name} 进入服务器");
+        }
+
+        private void EventManager_OnPlayerDisconnected(PlayerEx player, string reason)
+        {
+            ChatBox.SendChatMsgToAll(ChatColor.Color_System, $"[系统] 玩家 {player.Character.name} 退出服务器");
         }
 
         private void EventManager_OnPlayerLogin(PlayerEx player, AccountModel model)
@@ -132,7 +144,8 @@ namespace bkrp
 
         public static void SelectCharacter(PlayerEx player)
         {
-            Database.ExecuteSql($"SELECT * FROM `character` WHERE `userid`='${player.Account.id}'", (reader, error) =>
+            player.Emit("account:destroy");
+            Database.ExecuteSql($"SELECT * FROM `character` WHERE `userid`='{player.Account.id}'", (reader, error) =>
             {
                 if (error)
                 {
@@ -142,23 +155,19 @@ namespace bkrp
                 bool exist = false;
                 while(reader.Read())
                 {
-                    Log.Server("用户有角色");
                     exist = true;
+                    CharacterManager.LoadCharacter(player, false);
                     break;
                 }
 
                 if(exist == false)
                 {
-                    Log.Server("用户没有创建角色");
+                    player.Dimension = 100 + player.Account.id;
+                    player.Position = new Position(428.59f, -980.91f, 30.71f);
+                    player.Rotation = new Rotation(0f, 0f, 1.42f);
+                    player.Model = 0x5E3DA4A4;
+                    CharacterManager.OpenCharacterView(player);
                 }
-
-                player.Dimension = 0;
-                player.Position = new Position(-533.1306f, -219.414f, 37.64975f);
-                player.Rotation = new Rotation(0f, 0f, 177.7417f / 59);
-                player.Model = 0xD1FEB884;
-                player.ToggleFreeze(false, false);
-                player.Emit("account:destroy");
-                player.Emit("chat:toggleChatBox", true);
             });
         }
     }
