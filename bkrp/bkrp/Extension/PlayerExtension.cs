@@ -50,6 +50,28 @@ namespace bkrp
         {
             player.Emit("cursor:show", state);
         }
+
+        /// <summary>
+        /// 创建角色镜头
+        /// </summary>
+        /// <param name="player"></param>
+        public static void CreatePedCamera(this PlayerEx player, int fov)
+        {
+            player.Emit("camera:start");
+            Timer.SetTimeOut(50, () =>
+            {
+                player.Emit("camera:setFov", fov);
+            });
+        }
+
+        /// <summary>
+        /// 销毁角色镜头
+        /// </summary>
+        /// <param name="player"></param>
+        public static void DestroyPedCamera(this PlayerEx player)
+        {
+            player.Emit("camera:stop");
+        }
     }
 
     public class PlayerEx : Player
