@@ -39,7 +39,7 @@ namespace bkrp
             Check(RootPath + path);
             var str = File.ReadAllText(RootPath + path);
             if (str == null) str = "";
-            return null;
+            return str;
         }
 
         /// <summary>
