@@ -9,14 +9,14 @@ namespace bkrp
 {
     class CommandManager : IScript
     {
-        public static Dictionary<string, Action<PlayerEx, string[]>> CommandList = new Dictionary<string, Action<PlayerEx, string[]>>();
+        public static Dictionary<string, Action<PlayerEx, object[]>> CommandList = new Dictionary<string, Action<PlayerEx, object[]>>();
         public CommandManager()
         {
             
         }
 
         [ClientEvent("PushCommand")]
-        public void PushCommand(PlayerEx player, string command, string[] param)
+        public void PushCommand(PlayerEx player, string command, object[] param)
         {
             //判断是否存在指令
             if(CommandList.ContainsKey(command))
@@ -25,7 +25,7 @@ namespace bkrp
             }
         }
 
-        public static void AddCommand(string command, Action<PlayerEx, string[]> action)
+        public static void AddCommand(string command, Action<PlayerEx, object[]> action)
         {
             if(CommandList.ContainsKey(command))
             {

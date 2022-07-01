@@ -1,0 +1,530 @@
+[
+    {
+        "name": "古董骑兵匕首",
+        "id": 90001,
+        "weight": 0.5,
+        "data": "weapon_dagger"
+    },
+    {
+        "name": "棒球棍",
+        "id": 90002,
+        "weight": 0.8,
+        "data": "weapon_bat"
+    },
+    {
+        "name": "酒瓶",
+        "id": 90003,
+        "weight": 0.2,
+        "data": "weapon_bottle"
+    },
+    {
+        "name": "撬棍",
+        "id": 90004,
+        "weight": 0.2,
+        "data": "weapon_crowbar"
+    },
+    {
+        "name": "手电筒",
+        "id": 90005,
+        "weight": 0.5,
+        "data": "weapon_flashlight"
+    },
+    {
+        "name": "高尔夫球杆",
+        "id": 90006,
+        "weight": 0.5,
+        "data": "weapon_golfclub"
+    },
+    {
+        "name": "铁锤",
+        "id": 90007,
+        "weight": 0.8,
+        "data": "weapon_hammer"
+    },
+    {
+        "name": "手斧",
+        "id": 90008,
+        "weight": 1.2,
+        "data": "weapon_hatchet"
+    },
+    {
+        "name": "手指虎",
+        "id": 90009,
+        "weight": 0.2,
+        "data": "weapon_knuckle"
+    },
+    {
+        "name": "小刀",
+        "id": 90010,
+        "weight": 0.6,
+        "data": "weapon_knife"
+    },
+    {
+        "name": "开山刀",
+        "id": 90011,
+        "weight": 1.2,
+        "data": "weapon_machete"
+    },
+    {
+        "name": "弹簧刀",
+        "id": 90012,
+        "weight": 0.8,
+        "data": "weapon_switchblade"
+    },
+    {
+        "name": "警棍",
+        "id": 90013,
+        "weight": 1.2,
+        "data": "weapon_nightstick"
+    },
+    {
+        "name": "管钳扳手",
+        "id": 90014,
+        "weight": 1.2,
+        "data": "weapon_wrench"
+    },
+    {
+        "name": "战斗斧",
+        "id": 90015,
+        "weight": 1.5,
+        "data": "weapon_battleaxe"
+    },
+    {
+        "name": "台球杆",
+        "id": 90016,
+        "weight": 1,
+        "data": "weapon_poolcue"
+    },
+    {
+        "name": "石斧",
+        "id": 90017,
+        "weight": 0.8,
+        "data": "weapon_stone_hatchet"
+    },
+    {
+        "name": "手枪",
+        "id": 90501,
+        "weight": 2,
+        "data": "weapon_pistol"
+    },
+    {
+        "name": "MK2 手枪",
+        "id": 90502,
+        "weight": 2.2,
+        "data": "weapon_pistol_mk2"
+    },
+    {
+        "name": "战斗手枪",
+        "id": 90503,
+        "weight": 2,
+        "data": "weapon_combatpistol"
+    },
+    {
+        "name": "穿甲手枪",
+        "id": 90504,
+        "weight": 2.5,
+        "data": "weapon_appistol"
+    },
+    {
+        "name": "电击枪",
+        "id": 90505,
+        "weight": 2.5,
+        "data": "weapon_stungun"
+    },
+    {
+        "name": "0.5口径手枪",
+        "id": 90506,
+        "weight": 3,
+        "data": "weapon_pistol50"
+    },
+    {
+        "name": "劣质手枪",
+        "id": 90507,
+        "weight": 2,
+        "data": "weapon_snspistol"
+    },
+    {
+        "name": "MK2 劣质手枪",
+        "id": 90508,
+        "weight": 2.2,
+        "data": "weapon_snspistol_mk2"
+    },
+    {
+        "name": "重型手枪",
+        "id": 90509,
+        "weight": 3,
+        "data": "weapon_heavypistol"
+    },
+    {
+        "name": "老式手枪",
+        "id": 90510,
+        "weight": 2.4,
+        "data": "weapon_vintagepistol"
+    },
+    {
+        "name": "信号枪",
+        "id": 90511,
+        "weight": 2.5,
+        "data": "weapon_flaregun"
+    },
+    {
+        "name": "射手手枪",
+        "id": 90512,
+        "weight": 2.5,
+        "data": "weapon_marksmanpistol"
+    },
+    {
+        "name": "重型左轮手枪",
+        "id": 90513,
+        "weight": 3.5,
+        "data": "weapon_revolver"
+    },
+    {
+        "name": "MK2 重型左轮手枪",
+        "id": 90514,
+        "weight": 4,
+        "data": "weapon_revolver_mk2"
+    },
+    {
+        "name": "双动式左轮手枪",
+        "id": 90515,
+        "weight": 3,
+        "data": "weapon_doubleaction"
+    },
+    {
+        "name": "原子能枪",
+        "id": 90516,
+        "weight": 5,
+        "data": "weapon_raypistol"
+    },
+    {
+        "name": "陶瓷手枪",
+        "id": 90517,
+        "weight": 2.5,
+        "data": "weapon_ceramicpistol"
+    },
+    {
+        "name": "海军左轮手枪",
+        "id": 90518,
+        "weight": 3.5,
+        "data": "weapon_navyrevolver"
+    },
+    {
+        "name": "佩里科手枪",
+        "id": 90519,
+        "weight": 3.2,
+        "data": "weapon_gadgetpistol"
+    },
+    {
+        "name": "微型冲锋枪",
+        "id": 91001,
+        "weight": 3,
+        "data": "weapon_microsmg"
+    },
+    {
+        "name": "冲锋枪",
+        "id": 91002,
+        "weight": 3.8,
+        "data": "weapon_smg"
+    },
+    {
+        "name": "MK2 冲锋枪",
+        "id": 91003,
+        "weight": 4.2,
+        "data": "weapon_smg_mk2"
+    },
+    {
+        "name": "冲锋突击枪",
+        "id": 91004,
+        "weight": 4,
+        "data": "weapon_assaultsmg"
+    },
+    {
+        "name": "作战自卫冲锋枪",
+        "id": 91005,
+        "weight": 4,
+        "data": "weapon_combatpdw"
+    },
+    {
+        "name": "冲锋手枪",
+        "id": 91006,
+        "weight": 3.5,
+        "data": "weapon_machinepistol"
+    },
+    {
+        "name": "微型冲锋枪",
+        "id": 91007,
+        "weight": 3,
+        "data": "weapon_minismg"
+    },
+    {
+        "name": "泵动式霰弹枪",
+        "id": 91501,
+        "weight": 6,
+        "data": "weapon_pumpshotgun"
+    },
+    {
+        "name": "MK2 泵动式霰弹枪",
+        "id": 91502,
+        "weight": 6.5,
+        "data": "weapon_pumpshotgun_mk2"
+    },
+    {
+        "name": "短管霰弹枪",
+        "id": 91503,
+        "weight": 4,
+        "data": "weapon_sawnoffshotgun"
+    },
+    {
+        "name": "突击霰弹枪",
+        "id": 91504,
+        "weight": 7.5,
+        "data": "weapon_assaultshotgun"
+    },
+    {
+        "name": "无托式霰弹枪",
+        "id": 91505,
+        "weight": 6.5,
+        "data": "weapon_bullpupshotgun"
+    },
+    {
+        "name": "老式火枪",
+        "id": 91506,
+        "weight": 4,
+        "data": "weapon_musket"
+    },
+    {
+        "name": "重型霰弹枪",
+        "id": 91507,
+        "weight": 8,
+        "data": "weapon_heavyshotgun"
+    },
+    {
+        "name": "双管霰弹枪",
+        "id": 91508,
+        "weight": 5.5,
+        "data": "weapon_dbshotgun"
+    },
+    {
+        "name": "冲锋霰弹枪",
+        "id": 91509,
+        "weight": 7.2,
+        "data": "weapon_autoshotgun"
+    },
+    {
+        "name": "战斗霰弹枪",
+        "id": 91510,
+        "weight": 6.8,
+        "data": "weapon_combatshotgun"
+    },
+    {
+        "name": "突击步枪",
+        "id": 92001,
+        "weight": 6.5,
+        "data": "weapon_assaultrifle"
+    },
+    {
+        "name": "MK2 突击步枪",
+        "id": 92002,
+        "weight": 7,
+        "data": "weapon_assaultrifle_mk2"
+    },
+    {
+        "name": "卡宾步枪",
+        "id": 92003,
+        "weight": 6,
+        "data": "weapon_carbinerifle"
+    },
+    {
+        "name": "MK2 卡宾步枪",
+        "id": 92004,
+        "weight": 6.5,
+        "data": "weapon_carbinerifle_mk2"
+    },
+    {
+        "name": "高级步枪",
+        "id": 92005,
+        "weight": 5.8,
+        "data": "weapon_advancedrifle"
+    },
+    {
+        "name": "特质卡宾步枪",
+        "id": 92006,
+        "weight": 6.2,
+        "data": "weapon_specialcarbine"
+    },
+    {
+        "name": "MK2 特质卡宾步枪",
+        "id": 92007,
+        "weight": 6.5,
+        "data": "weapon_specialcarbine_mk2"
+    },
+    {
+        "name": "无托式步枪",
+        "id": 92008,
+        "weight": 5.6,
+        "data": "weapon_bullpuprifle"
+    },
+    {
+        "name": "MK2 无托式步枪",
+        "id": 92009,
+        "weight": 6,
+        "data": "weapon_bullpuprifle_mk2"
+    },
+    {
+        "name": "紧凑型步枪",
+        "id": 92010,
+        "weight": 5.2,
+        "data": "weapon_compactrifle"
+    },
+    {
+        "name": "军用步枪",
+        "id": 92011,
+        "weight": 5.8,
+        "data": "weapon_militaryrifle"
+    },
+    {
+        "name": "重型步枪",
+        "id": 92012,
+        "weight": 6,
+        "data": "weapon_heavyrifle"
+    },
+    {
+        "name": "机枪",
+        "id": 92501,
+        "weight": 7,
+        "data": "weapon_mg"
+    },
+    {
+        "name": "战斗机枪",
+        "id": 92502,
+        "weight": 7.5,
+        "data": "weapon_combatmg"
+    },
+    {
+        "name": "MK2 战斗机枪",
+        "id": 92503,
+        "weight": 8,
+        "data": "weapon_combatmg_mk2"
+    },
+    {
+        "name": "古森柏机枪",
+        "id": 92504,
+        "weight": 7.5,
+        "data": "weapon_gusenberg"
+    },
+    {
+        "name": "邪恶冥王",
+        "id": 92505,
+        "weight": 10,
+        "data": "weapon_raycarbine"
+    },
+    {
+        "name": "狙击步枪",
+        "id": 93001,
+        "weight": 8,
+        "data": "weapon_sniperrifle"
+    },
+    {
+        "name": "重型狙击步枪",
+        "id": 93002,
+        "weight": 9,
+        "data": "weapon_heavysniper"
+    },
+    {
+        "name": "MK2 重型狙击步枪",
+        "id": 93003,
+        "weight": 10,
+        "data": "weapon_heavysniper_mk2"
+    },
+    {
+        "name": "射手步枪",
+        "id": 93004,
+        "weight": 7.5,
+        "data": "weapon_marksmanrifle"
+    },
+    {
+        "name": "MK2 射手步枪",
+        "id": 93005,
+        "weight": 8,
+        "data": "weapon_marksmanrifle_mk2"
+    },
+    {
+        "name": "火箭炮",
+        "id": 93501,
+        "weight": 14,
+        "data": "weapon_rpg"
+    },
+    {
+        "name": "榴弹发射器",
+        "id": 93502,
+        "weight": 12,
+        "data": "weapon_grenadelauncher"
+    },
+    {
+        "name": "火神机枪",
+        "id": 93503,
+        "weight": 16,
+        "data": "weapon_minigun"
+    },
+    {
+        "name": "烟花发射器",
+        "id": 93504,
+        "weight": 12,
+        "data": "weapon_firework"
+    },
+    {
+        "name": "电磁步枪",
+        "id": 93505,
+        "weight": 8,
+        "data": "weapon_railgun"
+    },
+    {
+        "name": "制导火箭发射器",
+        "id": 93506,
+        "weight": 18,
+        "data": "weapon_hominglauncher"
+    },
+    {
+        "name": "紧凑型榴弹发射器",
+        "id": 93507,
+        "weight": 6,
+        "data": "weapon_compactlauncher"
+    },
+    {
+        "name": "寡妇制造者",
+        "id": 93508,
+        "weight": 10,
+        "data": "weapon_rayminigun"
+    },
+    {
+        "name": "脉冲枪",
+        "id": 93509,
+        "weight": 6,
+        "data": "weapon_emplauncher"
+    },
+    {
+        "name":"手雷",
+        "id":94001,
+        "weight":1,
+        "data":"weapon_grenade"
+    },
+    {
+        "name":"毒气弹",
+        "id":94002,
+        "weight":1,
+        "data":"weapon_bzgas"
+    },
+    {
+        "name":"燃烧弹",
+        "id":94003,
+        "weight":1,
+        "data":"weapon_molotov"
+    },
+    {
+        "name":"烟雾弹", 
+        "id":94004,
+        "weight":1,
+        "data":"weapon_smokegrenade"
+    }
+]
