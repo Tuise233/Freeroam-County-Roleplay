@@ -8,10 +8,6 @@ namespace bkrp
 
         public static event Action OnDataBaseConnected;
 
-        public static event Action OnDefaultGroupInit;
-
-        public static event Action OnDefaultVehicleInit;
-
         public static event Action OnInitializeEnd;
 
         public static void SetOrder()
@@ -20,12 +16,6 @@ namespace bkrp
             {
                 //数据库连接后
                 OnDataBaseConnected?.Invoke();
-
-                //默认组织初始化
-                OnDefaultGroupInit?.Invoke();
-
-                //默认载具初始化
-                OnDefaultVehicleInit?.Invoke();
             };
         }
 
