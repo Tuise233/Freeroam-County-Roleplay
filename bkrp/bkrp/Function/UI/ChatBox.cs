@@ -20,7 +20,13 @@ namespace bkrp
         [ClientEvent("PushMessage")]
         public static void PushMessage(PlayerEx player, string message)
         {
-            SendChatMsgToAll($"[{player.Account.id}]{player.Account.username}: {message}");
+            PlayerFactory.Players.ForEach((target) =>
+            {
+                if(player.Position.Distance(target.Position) < 30)
+                {
+                    SendChatMsgToPlayer(target, $"[{player.Account.id}]{player.Account.username}: {message}");
+                }
+            });
         }
 
         public static void SendChatMsgToPlayer(PlayerEx player, string message)
@@ -49,7 +55,7 @@ namespace bkrp
             });
         }
 
-        public static void SendNearByMsgFromPlayer(PlayerEx player, string message)
+        public static void SendNearbyMsgFromPlayer(PlayerEx player, string message)
         {
             PlayerFactory.Players.ForEach((target) =>
             {
